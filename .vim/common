@@ -1,0 +1,50 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+set rtp+=$HOME/.vim/bundle/Vundle.vim
+let g:powerline_pycmd = 'py3'
+set nu rnu
+syntax on
+filetype plugin indent on    " required
+
+set ignorecase
+set smartcase
+" set listchars=tab:▸\ ,eol:¬,trail:◦
+set list
+set tabstop=2 shiftwidth=2 expandtab
+
+
+set mouse=a
+map <silent> <C-\> :NERDTreeToggle<CR>
+set laststatus=2
+set hlsearch
+set incsearch
+set cindent
+
+set showcmd
+set foldmethod=indent
+set foldlevel=2
+" set foldclose=all
+
+" autocomplete
+set wildmode=longest,list,full
+set wildmenu
+
+" wildignore
+set wildignore+=*/node_modules/*
+set wildignore+=*/vendor/*
+set wildignore+=*.swp
+
+" share clipboard with system
+set clipboard=unnamed
+
+" colors
+set  t_Co=256
+
+
+" for faster escape
+set timeoutlen=1000 ttimeoutlen=0
+" for including files on path
+set path+=**
+
+

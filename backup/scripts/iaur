@@ -1,0 +1,6 @@
+#!/usr/bin/zsh
+
+git clone "https://aur.archlinux.org/$1.git" "$HOME/sources/$1"
+cd "$HOME/sources/$1"
+makepkg -si
+cd -

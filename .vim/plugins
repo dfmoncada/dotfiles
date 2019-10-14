@@ -1,0 +1,57 @@
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+" Git plugin not hosted on GitHub
+" git repos on your local machine (i.e. when working on your own plugin)
+" Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plugin 'https://github.com/powerline/powerline'
+Plugin 'https://github.com/itchyny/lightline.vim'
+
+Plugin 'https://github.com/terryma/vim-multiple-cursors'
+Plugin 'https://github.com/tpope/vim-surround'
+Plugin 'https://github.com/scrooloose/nerdtree'
+Plugin 'https://github.com/w0rp/ale'
+Plugin 'https://github.com/airblade/vim-gitgutter'
+Plugin 'https://github.com/tpope/vim-unimpaired'
+Plugin 'https://github.com/tpope/vim-commentary'
+Plugin 'https://github.com/tpope/vim-rails'
+Plugin 'https://github.com/tpope/vim-sensible'
+Plugin 'https://github.com/Xuyuanp/nerdtree-git-plugin'
+Plugin 'https://github.com/srcery-colors/srcery-vim'
+Plugin 'https://github.com/drewtempelmeyer/palenight.vim'
+Plugin 'https://github.com/kana/vim-textobj-user'
+Plugin 'https://github.com/nelstrom/vim-textobj-rubyblock'
+Plugin 'https://github.com/vim-scripts/ReplaceWithRegister'
+Plugin 'https://github.com/pangloss/vim-javascript'
+Plugin 'https://github.com/mxw/vim-jsx'
+Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'https://github.com/tpope/vim-repeat'
+" Plugin 'https://github.com/vim-syntastic/syntastic'
+Plugin 'https://github.com/Shougo/neocomplete.vim'
+" Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'https://github.com/lifepillar/vim-mucomplete'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'ctrlpvim/ctrlp.vim'
+
+
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+" Plugin 'ascenator/L9', {'name': 'newL9'}
+
+call vundle#end()            " required
+
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line

@@ -1,0 +1,54 @@
+function tmux() {
+  emulate -L zsh
+
+  # Make sure even pre-existing tmux sessions use the latest SSH_AUTH_SOCK.
+  # (Inspired by: https://gist.github.com/lann/6771001)
+  local SOCK_SYMLINK=~/.ssh/ssh_auth_sock
+  if [ -r "$SSH_AUTH_SOCK" -a ! -L "$SSH_AUTH_SOCK" ]; then
+    ln -sf "$SSH_AUTH_SOCK" $SOCK_SYMLINK
+  fi
+
+  # If provided with args, pass them through.
+  if [[ -n "$@" ]]; then
+    env SSH_AUTH_SOCK=$SOCK_SYMLINK tmux "$@"
+    return
+  fi
+
+  # Check for .tmux file
+  if [ -x .tmux ]; then
+    ./.tmux
+    return
+  fi
+  # Attach to existing session, or create one, based on current directory.
+  local SESSION_NAME=$(basename "${$(pwd)//[.:]/_}")
+  tmux new -A -s "$SESSION_NAME"
+}
+
+
+function iaur() {
+  git clone "https://aur.archlinux.org/$1.git" "$HOME/sources/$1"
+  cd "$HOME/sources/$1"
+  makepkg -si
+  cd -
+}
+
+# should be in project
+# will probable change with .tmux inside projects
+function setup_sldesk () {
+  tmux -2 new-session -d -s sldesk -n API
+  tmux send-keys "cd $slapi" C-m "clear" C-m
+  tmux new-window -t sldesk -n FE
+  tmux send-keys "cd $slfe" C-m "clear" C-m
+}
+
+function setup_sldesk_servers () {
+  tmux -2 new-session -d -s irwin_servers -n servers
+  tmux send-keys "cd $slapi" C-m "clear" C-m "rails s" C-m
+  tmux split-window -h
+  tmux send-keys "cd $slfe" C-m "clear" C-m "npm start" C-m
+}
+
+function sldesk_tmux() {
+  setup_sldesk
+  setup_sldesk_servers
+}

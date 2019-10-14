@@ -1,0 +1,10 @@
+source $HOME/.vim/common
+source $HOME/.vim/plugins
+source $HOME/.vim/functions
+source $HOME/.vim/bindings
+
+" colorscheme srcery
+colorscheme palenight
+" hi Normal ctermbg=none
+" hi CursorLine term=bold cterm=bold guibg=Grey40
+
