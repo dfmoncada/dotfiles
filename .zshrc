@@ -22,8 +22,8 @@ source $HOME/.zsh/aliases
 source $HOME/.zsh/functions
 
 # oh-my-sh
-source $ZSH/oh-my-zsh.sh
 source $HOME/.zsh/plugins
+source $ZSH/oh-my-zsh.sh
 
 # LOAD powerline fonts
 powerline-daemon -q
