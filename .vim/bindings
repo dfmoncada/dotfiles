@@ -7,3 +7,6 @@ nnoremap <C-/> :noh<return>
 nnoremap j gj
 nnoremap k gk
 
+" open current file in nerdtree
+nnoremap - :NERDTreeFind<CR>
+
