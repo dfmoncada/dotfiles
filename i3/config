@@ -215,6 +215,7 @@ default_border pixel 3
 bindsym Control+Mod1+l exec --no-startup-id i3lock -c 000000 -d
 
 # swap_workspaces
+# TODO: should change the path, but will figure that out later
 bindsym $mod+Shift+s exec $HOME/dotfiles/i3/swap_workspaces.py
 # bindsym $mod+i exec $HOME/scripts/sservers
 
@@ -233,6 +234,7 @@ set $ws10 "10:"
 bindsym F1 exec --no-startup-id echo "help" > /dev/null
 
 exec --no-startup-id compton
+exec --no-startup-id clipit -d
 # Network tool
 exec nm-applet
 # lower resolution
@@ -249,10 +251,9 @@ exec_always xcompmgr -c
 # exec_always --no-startup-id ~/.config/polybar/launch.sh &amp;
 
 # polybar
-
+# need to figure out how to make this work will brea
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh example
 
 # exec_always --no-startup_id xmodmap -e "clear lock" #disable caps lock switch
 # exec_always --no-startup_id xmodmap -e "keysym Caps_Lock = Escape" #set caps_lock as escape
 bindsym $mod+z focus child
-
