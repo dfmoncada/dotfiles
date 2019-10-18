@@ -1,6 +1,7 @@
 plugins=(
   git
   # bundler
+  rbenv
   pip
   dotenv
   osx

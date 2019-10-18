@@ -4,7 +4,8 @@ source $HOME/.vim/functions
 source $HOME/.vim/bindings
 
 " colorscheme srcery
-colorscheme palenight
+" colorscheme palenight
+colorscheme gruvbox
 " hi Normal ctermbg=none
 " hi CursorLine term=bold cterm=bold guibg=Grey40
 

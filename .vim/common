@@ -48,3 +48,5 @@ set timeoutlen=1000 ttimeoutlen=0
 set path+=**
 
 
+"substitute highlight/preview
+set inccommand=nosplit

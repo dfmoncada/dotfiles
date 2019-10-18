@@ -15,11 +15,13 @@ export deusapi="$HOME/Projects/deuster/rails-api"
 export slapi="$HOME/sldesk/backend"
 export slfe="$HOME/sldesk/frontend"
 
+source $HOME/.zsh/path
 source $HOME/.zsh/colors
 source $HOME/.zsh/exports
-source $HOME/.zsh/path
 source $HOME/.zsh/aliases
 source $HOME/.zsh/functions
+
+eval "$(rbenv init -)"
 
 # oh-my-sh
 source $HOME/.zsh/plugins
