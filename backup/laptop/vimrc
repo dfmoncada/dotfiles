@@ -1,0 +1,319 @@
+set rtp+=~/.vim/bundle/Vundle.vim
+
+set encoding=UTF-8
+let g:powerline_pycmd = 'py3'
+set nu rnu
+syntax on
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'powerline/powerline'
+Plugin 'itchyny/lightline.vim'
+Plugin 'tpope/vim-surround'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'w0rp/ale'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-sensible'
+Plugin 'sirver/ultisnips'
+
+Plugin 'kana/vim-textobj-user'
+Plugin 'nelstrom/vim-textobj-rubyblock'
+Plugin 'vim-scripts/ReplaceWithRegister'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'tpope/vim-repeat'
+" Plugin 'lifepillar/vim-mucomplete'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'Shougo/deoplete.nvim'
+Plugin 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+Plugin 'ervandew/supertab'
+Plugin 'morhetz/gruvbox'
+Plugin 'Shougo/neosnippet.vim'
+Plugin 'Shougo/neosnippet-snippets'
+
+" Plugin 'terryma/vim-multiple-cursors'
+" Plugin 'drewtempelmeyer/palenight.vim'
+" Plugin 'srcery-colors/srcery-vim'
+" Plugin 'https://github.com/vim-syntastic/syntastic'
+" Plugin 'https://github.com/Shougo/neocomplete.vim'
+" Plugin 'git://git.wincent.com/command-t.git'
+" Plugin 'davidhalter/jedi-vim'
+
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+" Plugin 'ascenator/L9', {'name': 'newL9'}
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+colorscheme gruvbox
+
+set mouse=a
+map <silent> <C-\> :NERDTreeToggle<CR>
+set laststatus=2
+set hlsearch
+set incsearch
+set cindent
+set inccommand=nosplit
+highlight Substitute cterm=NONE ctermfg=black ctermbg=9
+
+" hi Normal ctermbg=none
+" hi CursorLine term=bold cterm=bold guibg=Grey40
+
+
+set ignorecase
+set smartcase
+" set listchars=tab:▸\ ,eol:¬,trail:◦
+set list
+set tabstop=2 shiftwidth=2 expandtab
+
+" Delete trailing whitespace
+function! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+
+map <leader>t :CommandT<CR>
+set showcmd
+set foldmethod=indent
+set foldlevel=2
+" set foldclose=all
+
+" autocomplete
+set wildmode=longest,list,full
+set wildmenu
+
+" wildignore
+set wildignore+=*/node_modules/*
+set wildignore+=*/vendor/*
+set wildignore+=*.swp
+
+" share clipboard with system
+set clipboard=unnamed
+
+" Dim inactive windows using 'colorcolumn' setting
+" This tends to slow down redrawing, but is very useful.
+" Based on https://groups.google.com/d/msg/vim_use/IJU-Vk-QLJE/xz4hjPjCRBUJ
+" XXX: this will only work with lines containing text (i.e. not '~')
+" from 
+if exists('+colorcolumn')
+  function! s:DimInactiveWindows()
+    for i in range(1, tabpagewinnr(tabpagenr(), '$'))
+      let l:range = ""
+      if i != winnr()
+        if &wrap
+         " HACK: when wrapping lines is enabled, we use the maximum number
+         " of columns getting highlighted. This might get calculated by
+         " looking for the longest visible line and using a multiple of
+         " winwidth().
+         let l:width=256 " max
+        else
+         let l:width=winwidth(i)
+        endif
+        let l:range = join(range(1, l:width), ',')
+      endif
+      call setwinvar(i, '&colorcolumn', l:range)
+    endfor
+  endfunction
+  augroup DimInactiveWindows
+    au!
+    au WinEnter * call s:DimInactiveWindows()
+    au WinEnter * set cursorline
+    au WinLeave * set nocursorline
+  augroup END
+endif
+
+" colors
+set  t_Co=256
+
+
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+nnoremap <C-/> :noh<return>
+nnoremap j gj
+nnoremap k gk
+nnoremap - :NERDTreeFind<CR>
+
+" for faster escape
+set timeoutlen=1000 ttimeoutlen=0
+" for including files on path
+set path+=**
+
+let g:NERDTreeDirArrowExpandable="+"
+let g:NERDTreeDirArrowCollapsible="-"
+
+let g:ctrlp_custom_ignore = 'node_modules\|git\|gems\|vendor'
+
+" #######################################################
+" ###########    INDENT OBJECT           ################
+" #######################################################
+"
+onoremap <silent>ai :<C-U>cal <SID>IndTxtObj(0)<CR>
+onoremap <silent>ii :<C-U>cal <SID>IndTxtObj(1)<CR>
+vnoremap <silent>ai :<C-U>cal <SID>IndTxtObj(0)<CR><Esc>gv
+vnoremap <silent>ii :<C-U>cal <SID>IndTxtObj(1)<CR><Esc>gv
+
+function! s:IndTxtObj(inner)
+  let curline = line(".")
+  let lastline = line("$")
+  let i = indent(line(".")) - &shiftwidth * (v:count1 - 1)
+  let i = i < 0 ? 0 : i
+  if getline(".") !~ "^\\s*$"
+    let p = line(".") - 1
+    let nextblank = getline(p) =~ "^\\s*$"
+    while p > 0 && ((i == 0 && !nextblank) || (i > 0 && ((indent(p) >= i && !(nextblank && a:inner)) || (nextblank && !a:inner))))
+      -
+      let p = line(".") - 1
+      let nextblank = getline(p) =~ "^\\s*$"
+    endwhile
+    normal! 0V
+    call cursor(curline, 0)
+    let p = line(".") + 1
+    let nextblank = getline(p) =~ "^\\s*$"
+    while p <= lastline && ((i == 0 && !nextblank) || (i > 0 && ((indent(p) >= i && !(nextblank && a:inner)) || (nextblank && !a:inner))))
+      +
+      let p = line(".") + 1
+      let nextblank = getline(p) =~ "^\\s*$"
+    endwhile
+    normal! $
+  endif
+endfunction
+
+" #######################################################
+" ###########    ULTISNIPS/NEOSNIPPET    ################
+" #######################################################
+
+" ULTISNIPS
+" let g:UltiSnipsEditSplit="vertical"
+"Open UltiSnips edit function
+" nmap <leader>ue :UltiSnipsEdit<cr>
+" NEOSNIPPET
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+let g:neosnippet#snippets_directory='~/local_setup/vim/snippets'
+
+
+" #######################################################
+" ###########    DEOPLETE/TERN CONFIG    ################
+" #######################################################
+"
+"
+" Whether to include the types of the completions in the result data. Default: 0
+let g:deoplete#sources#ternjs#types = 1
+
+" Whether to include the distance (in scopes for variables, in prototypes for 
+" properties) between the completions and the origin position in the result 
+" data. Default: 0
+let g:deoplete#sources#ternjs#depths = 1
+
+" Whether to include documentation strings (if found) in the result data.
+" Default: 0
+let g:deoplete#sources#ternjs#docs = 1
+
+" When on, only completions that match the current word at the given point will
+" be returned. Turn this off to get all results, so that you can filter on the 
+" client side. Default: 1
+let g:deoplete#sources#ternjs#filter = 0
+
+" Whether to use a case-insensitive compare between the current word and 
+" potential completions. Default 0
+let g:deoplete#sources#ternjs#case_insensitive = 1
+
+" When completing a property and no completions are found, Tern will use some 
+" heuristics to try and return some properties anyway. Set this to 0 to 
+" turn that off. Default: 1
+let g:deoplete#sources#ternjs#guess = 0
+
+" Determines whether the result set will be sorted. Default: 1
+let g:deoplete#sources#ternjs#sort = 0
+
+" When disabled, only the text before the given position is considered part of 
+" the word. When enabled (the default), the whole variable name that the cursor
+" is on will be included. Default: 1
+let g:deoplete#sources#ternjs#expand_word_forward = 0
+
+" Whether to ignore the properties of Object.prototype unless they have been 
+" spelled out by at least two characters. Default: 1
+let g:deoplete#sources#ternjs#omit_object_prototype = 0
+
+" Whether to include JavaScript keywords when completing something that is not 
+" a property. Default: 0
+let g:deoplete#sources#ternjs#include_keywords = 1
+
+" If completions should be returned when inside a literal. Default: 1
+let g:deoplete#sources#ternjs#in_literal = 0
+
+
+"Add extra filetypes
+let g:deoplete#sources#ternjs#filetypes = [
+                \ 'jsx',
+                \ 'javascript.jsx',
+                \ 'vue',
+                \ '...'
+                \ ]
+
+"START deoplete
+let g:deoplete#enable_at_startup = 1
+if !exists('g:deoplete#omni#input_patterns')
+  let g:deoplete#omni#input_patterns = {}
+endif
+" let g:deoplete#disable_auto_complete = 1
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
+
+" deoplete omnifuncions
+augroup omnifuncs
+  autocmd!
+  autocmd Filetype css setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd Filetype html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd Filetype javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  autocmd Filetype python setlocal omnifunc=python3complete#Complete
+  autocmd Filetype xml setlocal omnifunc=xmlcomplete#CompleteTags
+augroup end
+
+autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
+
+" if exists('g:plugs["deoplete-ternjs"]')
+  let g:tern_show_argument_hints = 'on_hold'
+  let g:tern_show_signature_in_pum = 1
+
+  autocmd FileType setlocal omnifunc=tern#Complete
+" endif
+
+
+
+" ########################## auto complete
+" deoplete tab-complete
+" inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" tern
+
+
+

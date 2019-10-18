@@ -10,3 +10,5 @@ nnoremap k gk
 " open current file in nerdtree
 nnoremap - :NERDTreeFind<CR>
 
+" visual replace
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
