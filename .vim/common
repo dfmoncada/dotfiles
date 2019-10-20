@@ -50,3 +50,7 @@ set path+=**
 
 "substitute highlight/preview
 set inccommand=nosplit
+
+" Nerdtree bookmarks behavior
+let NERDTreeChDirMode=2
+

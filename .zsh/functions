@@ -15,7 +15,7 @@ function tmux() {
   fi
 
   # Check for .tmux file
-  if [ -x .tmux ]; then
+  if [[ -x .tmux && $PWD != $HOME ]]; then
     ./.tmux
     return
   fi
