@@ -20,6 +20,7 @@ source $HOME/.zsh/colors
 source $HOME/.zsh/exports
 source $HOME/.zsh/aliases
 source $HOME/.zsh/functions
+source $HOME/.zsh/prompt
 
 eval "$(rbenv init -)"
 
@@ -31,5 +32,3 @@ source $ZSH/oh-my-zsh.sh
 powerline-daemon -q
 . /usr/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh
 # new line
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs time)

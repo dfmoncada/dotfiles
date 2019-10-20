@@ -7,13 +7,12 @@ plugins=(
   osx
   rake
   ruby
-  npm-run
-  better-npm-completion
-  completions
+  zsh-better-npm-completion
+  zsh-completions
   docker
-  docker-zsh-completion
   docker-compose
   npm
+  fzf
   # tmux
-  fzf-zsh
+  # fzf-zsh
 )

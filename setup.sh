@@ -1,6 +1,6 @@
 #!/bin/sh
 
-base=`pwd`
+base="${0%/*}"
 
 function rm_or_backup() {
   file_name=$1
@@ -12,12 +12,12 @@ function rm_or_backup() {
   fi
 }
 
-rm_or_backup .zsh
+rm_or_backup .zs
 rm_or_backup .zshrc
 rm_or_backup .vim
 rm_or_backup .tmux.conf
 
 ln -s $base/.zsh $HOME/.zsh
-ln -s $base/.vim $HOME/.vim
 ln -s $base/.zshrc $HOME/.zshrc
+ln -s $base/.vim $HOME/.vim
 ln -s $base/.tmux.conf $HOME/.tmux.conf
