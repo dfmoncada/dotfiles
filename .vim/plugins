@@ -31,6 +31,7 @@ call vundle#begin()
   " Plugin 'https://github.com/vim-syntastic/syntastic'
   Plugin 'Shougo/neocomplete.vim'
   " Plugin 'git://git.wincent.com/command-t.git'
+  Plugin 'ryanoasis/vim-devicons'
   Plugin 'lifepillar/vim-mucomplete'
   Plugin 'davidhalter/jedi-vim'
   Plugin 'ctrlpvim/ctrlp.vim'
