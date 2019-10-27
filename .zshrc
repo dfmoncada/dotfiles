@@ -1,5 +1,6 @@
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
+autoload -Uz vcs_info
 
 export api="$HOME/platform/irwin-app/irwin-api"
 export fe="$HOME/platform/irwin-app/irwin-fe"

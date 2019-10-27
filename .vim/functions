@@ -1,3 +1,4 @@
+" vim:ft=vim
 
 " Delete trailing whitespace
 function! <SID>StripTrailingWhitespaces()

@@ -1,3 +1,4 @@
+# vim:ft=zsh
 SYSTEM_PATH=$PATH
 unset PATH
 
