@@ -1,3 +1,4 @@
+" vim:ft=vim
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -6,7 +7,6 @@ call vundle#begin()
   Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
   Plugin 'powerline/powerline'
   Plugin 'powerline/powerline-fonts'
-  " Plugin 'itchyny/lightline.vim'
   Plugin 'vim-airline/vim-airline'
   Plugin 'terryma/vim-multiple-cursors'
   Plugin 'tpope/vim-surround'
@@ -20,7 +20,6 @@ call vundle#begin()
   Plugin 'Xuyuanp/nerdtree-git-plugin'
   Plugin 'srcery-colors/srcery-vim'
   Plugin 'morhetz/gruvbox'
-  " Plugin 'drewtempelmeyer/palenight.vim'
   Plugin 'kana/vim-textobj-user'
   Plugin 'nelstrom/vim-textobj-rubyblock'
   Plugin 'vim-scripts/ReplaceWithRegister'
@@ -28,18 +27,12 @@ call vundle#begin()
   Plugin 'mxw/vim-jsx'
   Plugin 'ntpeters/vim-better-whitespace'
   Plugin 'tpope/vim-repeat'
-  " Plugin 'https://github.com/vim-syntastic/syntastic'
   Plugin 'Shougo/neocomplete.vim'
-  " Plugin 'git://git.wincent.com/command-t.git'
   Plugin 'ryanoasis/vim-devicons'
   Plugin 'lifepillar/vim-mucomplete'
   Plugin 'davidhalter/jedi-vim'
   Plugin 'ctrlpvim/ctrlp.vim'
-
-
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
-" Plugin 'ascenator/L9', {'name': 'newL9'}
+  Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 
 call vundle#end()            " required
 
