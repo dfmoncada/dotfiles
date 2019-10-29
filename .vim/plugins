@@ -29,10 +29,12 @@ call vundle#begin()
   Plugin 'tpope/vim-repeat'
   Plugin 'Shougo/neocomplete.vim'
   Plugin 'ryanoasis/vim-devicons'
-  Plugin 'lifepillar/vim-mucomplete'
+  " Plugin 'lifepillar/vim-mucomplete'
   Plugin 'davidhalter/jedi-vim'
   Plugin 'ctrlpvim/ctrlp.vim'
   Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+  Plugin 'SirVer/ultisnips'
+  Plugin 'honza/vim-snippets'
 
 call vundle#end()            " required
 
