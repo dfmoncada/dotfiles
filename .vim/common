@@ -13,6 +13,8 @@ set smartcase
 " set listchars=tab:▸\ ,eol:¬,trail:◦
 set list
 set tabstop=2 shiftwidth=2 expandtab
+set nofixendofline
+set hidden
 
 
 set mouse=a

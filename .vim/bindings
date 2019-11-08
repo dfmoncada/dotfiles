@@ -17,8 +17,11 @@ vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 " unbind Q (ex mode)
 map Q <Nop>
 
-" easier save
-nnoremap zz :w<CR>
+" easier save/close
+nnoremap <leader>s :w<CR>
+nnoremap <leader>x :wq<CR>
+nnoremap <leader>q :q<CR>
 
 " easier Gstatus
 nnoremap <C-G> :Gstatus<CR>
+nnoremap <leader>g :Gstatus<CR>

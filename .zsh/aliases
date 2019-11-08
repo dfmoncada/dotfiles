@@ -6,6 +6,7 @@
 alias ....='cd ../..'
 alias :e=vim
 alias :qa='test -n "$TMUX" && tmux kill-window'
+alias q=exit
 alias :q=exit
 alias :sp='test -n "$TMUX" && tmux split-window'
 alias :vs='test -n "$TMUX" && tmux split-window -h'
