@@ -2,6 +2,7 @@ source $HOME/.vim/common
 source $HOME/.vim/plugins
 source $HOME/.vim/functions
 source $HOME/.vim/bindings
+source $HOME/.vim/coc
 
 " colorscheme srcery
 " colorscheme palenight
