@@ -1,0 +1,4 @@
+{
+  "java.jdt.ls.vmargs": "-javaagent:/home/diegos/Downloads/lombok.jar -Xbootclasspath/a:/home/diegos/Downloads/lombok.jar",
+  "python.jediPath": "/home/diegos/.local/lib/python3.8/site-packages"
+}

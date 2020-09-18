@@ -1,0 +1,120 @@
+" set runtimepath^=~/.vim runtimepath+=~/.vim/after
+" let &packpath = &runtimepath
+" source ~/.vim/vimrc
+" ##########################################
+" ######## PACKAGE MANAGER #################
+" ##########################################
+
+if &compatible
+  set nocompatible
+endif
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+
+if dein#load_state('~/.cache/dein')
+  call dein#begin('~/.cache/dein')
+  call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
+
+  call dein#add('ctrlpvim/ctrlp.vim')
+  call dein#add('scrooloose/nerdtree')
+  call dein#add('powerline/powerline')
+  call dein#add('itchyny/lightline.vim')
+  call dein#add('ryanoasis/vim-devicons')
+  call dein#add('morhetz/gruvbox')
+
+  call dein#add('tpope/vim-fugitive')
+  call dein#add('w0rp/ale')
+
+  call dein#add('tpope/vim-surround')
+  call dein#add('lifepillar/vim-mucomplete')
+  call dein#add('Shougo/deoplete.nvim')
+  call dein#add('carlitux/deoplete-ternjs')
+  call dein#add('ncm2/ncm2')
+  call dein#add('ctrlpvim/ctrlp.vim')
+  call dein#add('ervandew/supertab')
+  call dein#add('tpope/vim-repeat')
+
+  call dein#add('morhetz/gruvbox')
+  call dein#add('tpope/vim-unimpaired')
+  call dein#add('tpope/vim-commentary')
+  call dein#add('tpope/vim-rails')
+  call dein#add('tpope/vim-sensible')
+  call dein#add('Xuyuanp/nerdtree-git-plugin')
+  call dein#add('kana/vim-textobj-user')
+  call dein#add('nelstrom/vim-textobj-rubyblock')
+  call dein#add('vim-scripts/ReplaceWithRegister')
+  call dein#add('pangloss/vim-javascript')
+  call dein#add('mxw/vim-jsx')
+
+  if !has('nvim')
+    call dein#add('roxma/nvim-yarp')
+    call dein#add('roxma/vim-hug-neovim-rpc')
+  endif
+  call dein#end()
+  call dein#save_state()
+endif
+
+" ##########################################
+" ######## CONFIG ##########################
+" ##########################################
+
+filetype plugin indent on
+syntax enable
+colorscheme gruvbox
+set nu rnu
+let g:NERDTreeDirArrowExpandable="+"
+let g:NERDTreeDirArrowCollapsible="-"
+
+
+" ##########################################
+" ######## REMAPS ##########################
+" ##########################################
+
+" Pane and normal
+
+map <silent> <C-\> :NERDTreeToggle<CR>
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+nnoremap <C-/> :noh<return>
+nnoremap j gj
+nnoremap k gk
+
+
+" ##########################################
+" ######## INDENT OBJECT ###################
+" ##########################################
+
+"place in vimrc
+onoremap <silent>ai :<C-U>cal <SID>IndTxtObj(0)<CR>
+onoremap <silent>ii :<C-U>cal <SID>IndTxtObj(1)<CR>
+vnoremap <silent>ai :<C-U>cal <SID>IndTxtObj(0)<CR><Esc>gv
+vnoremap <silent>ii :<C-U>cal <SID>IndTxtObj(1)<CR><Esc>gv
+
+function! s:IndTxtObj(inner)
+  let curline = line(".")
+  let lastline = line("$")
+  let i = indent(line(".")) - &shiftwidth * (v:count1 - 1)
+  let i = i < 0 ? 0 : i
+  if getline(".") !~ "^\\s*$"
+    let p = line(".") - 1
+    let nextblank = getline(p) =~ "^\\s*$"
+    while p > 0 && ((i == 0 && !nextblank) || (i > 0 && ((indent(p) >= i && !(nextblank && a:inner)) || (nextblank && !a:inner))))
+      -
+      let p = line(".") - 1
+      let nextblank = getline(p) =~ "^\\s*$"
+    endwhile
+    normal! 0V
+    call cursor(curline, 0)
+    let p = line(".") + 1
+    let nextblank = getline(p) =~ "^\\s*$"
+    while p <= lastline && ((i == 0 && !nextblank) || (i > 0 && ((indent(p) >= i && !(nextblank && a:inner)) || (nextblank && !a:inner))))
+      +
+      let p = line(".") + 1
+      let nextblank = getline(p) =~ "^\\s*$"
+    endwhile
+    normal! $
+  endif
+endfunction
+
+
