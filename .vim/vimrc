@@ -3,10 +3,20 @@ source $HOME/.vim/plugins
 source $HOME/.vim/functions
 source $HOME/.vim/bindings
 source $HOME/.vim/coc
+source $HOME/.vim/plugin_functions.vim
+source $HOME/.vim/styles
 
-" colorscheme srcery
+" colorscheme molokai
+" colorscheme base16-google-dark
+" colorscheme base16-dracula
+colorscheme base16-default-dark
+colorscheme base16-ocean
 " colorscheme palenight
-colorscheme gruvbox
+" colorscheme gruvbox
+" colorscheme base16
+" colorscheme atom-dark
+" colorscheme srcery
 " hi Normal ctermbg=none
 " hi CursorLine term=bold cterm=bold guibg=Grey40
 
+highlight Comment cterm=italic gui=italic

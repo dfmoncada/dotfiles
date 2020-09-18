@@ -8,35 +8,65 @@ call vundle#begin()
   Plugin 'powerline/powerline'
   Plugin 'powerline/powerline-fonts'
   Plugin 'vim-airline/vim-airline'
-  Plugin 'terryma/vim-multiple-cursors'
   Plugin 'tpope/vim-surround'
   Plugin 'scrooloose/nerdtree'
-  Plugin 'w0rp/ale'
-  Plugin 'airblade/vim-gitgutter'
   Plugin 'tpope/vim-unimpaired'
   Plugin 'tpope/vim-commentary'
   Plugin 'tpope/vim-rails'
   Plugin 'tpope/vim-sensible'
-  Plugin 'Xuyuanp/nerdtree-git-plugin'
-  Plugin 'srcery-colors/srcery-vim'
-  Plugin 'morhetz/gruvbox'
+  " Plugin 'Xuyuanp/nerdtree-git-plugin'
+  Plugin 'chriskempson/base16-vim'
+  Plugin 'ayu-theme/ayu-vim'
   Plugin 'kana/vim-textobj-user'
   Plugin 'nelstrom/vim-textobj-rubyblock'
-  Plugin 'vim-scripts/ReplaceWithRegister'
   Plugin 'pangloss/vim-javascript'
-  Plugin 'MaxMEllon/vim-jsx-pretty'
   Plugin 'ntpeters/vim-better-whitespace'
   Plugin 'tpope/vim-repeat'
-  Plugin 'Shougo/neocomplete.vim'
-  Plugin 'ryanoasis/vim-devicons'
-  " Plugin 'lifepillar/vim-mucomplete'
-  " Plugin 'davidhalter/jedi-vim'
+  " Plugin 'ryanoasis/vim-devicons'
   Plugin 'ctrlpvim/ctrlp.vim'
   Plugin 'neoclide/coc.nvim', {'branch': 'release'}
   Plugin 'SirVer/ultisnips'
   Plugin 'honza/vim-snippets'
+  Plugin 'vim-scripts/CSApprox'
+  Plugin 'pseewald/vim-anyfold'
+  Plugin 'arecarn/vim-fold-cycle'
+  Plugin 'mbbill/undotree'
+  Plugin 'majutsushi/tagbar'
+  Plugin 'liuchengxu/vista.vim'
+  Plugin 'Lenovsky/nuake'
+  Plugin 'xolox/vim-notes'
+  Plugin 'xolox/vim-colorscheme-switcher'
 
+  Plugin 'MaxMEllon/vim-jsx-pretty'
+  Plugin 'uiiaoo/java-syntax.vim'
+  Plugin 'curist/vim-angular-template'
+  Plugin 'hashivim/vim-terraform'
+
+  Plugin 'alvan/vim-closetag'
+  Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plugin 'junegunn/fzf.vim'
+  Plugin 'ton/vim-alternate'
+  Plugin 'sonph/onehalf', {'rtp': 'vim/'}
+  Plugin 'mileszs/ack.vim'
+  Plugin 'junegunn/goyo.vim'
+  Plugin 'justinmk/vim-dirvish'
+  Plugin 'ivalkeen/vim-ctrlp-tjump'
+
+  Plugin 'xolox/vim-misc'
+  Plugin 'xolox/vim-session'
 call vundle#end()            " required
+
+"srcery
+  " Plugin 'srcery-colors/srcery-vim'
+  " Plugin 'tomasr/molokai'
+  " Plugin 'morhetz/gruvbox'
+  " Plugin 'gosukiwi/vim-atom-dark'
+  " Plugin 'w0rp/ale'
+  " Plugin 'airblade/vim-gitgutter'
+  " Plugin 'vim-scripts/ReplaceWithRegister'
+  " Plugin 'Shougo/neocomplete.vim'
+  " Plugin 'lifepillar/vim-mucomplete'
+  " Plugin 'davidhalter/jedi-vim'
 
 "filetype plugin on
 "
@@ -47,4 +77,4 @@ call vundle#end()            " required
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 "
 " see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+"

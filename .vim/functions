@@ -40,3 +40,17 @@ if exists('+colorcolumn')
     au WinLeave * set nocursorline
   augroup END
 endif
+
+function! s:attempt_select_last_file() abort
+  let l:previous=expand('#:t')
+  if l:previous != ''
+    call search(l:previous)
+  endif
+endfunction
+
+" if has('autocmd')
+"   augroup Diego
+"     autocmd!
+"     autocmd User NERDTreeInit call s:attempt_select_last_file()
+"   augroup END
+" endif

@@ -1,27 +1,64 @@
+let mapleader = " "
+let maplocalleader = "\\"
 " vim:ft=vim
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-nnoremap <C-/> :noh<return>
+noremap Y y$
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-l> <C-W>l
+nnoremap <C-h> <C-W>h
+noremap <C-/> :noh<return>
 " go to next display line
 nnoremap j gj
 nnoremap k gk
-
-" open current file in nerdtree
-nnoremap - :NERDTreeFind<CR>
+nnoremap <Leader>o :only<CR>
 
 " visual replace
-vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+vnoremap <leader>r "hy:%s/<C-r>h//gc<left><left><left>
 
 " unbind Q (ex mode)
 map Q <Nop>
 
 " easier save/close
-nnoremap <leader>s :w<CR>
+nnoremap <leader>w :w<CR>
 nnoremap <leader>x :wq<CR>
 nnoremap <leader>q :q<CR>
 
 " easier Gstatus
-nnoremap <C-G> :Gstatus<CR>
+nnoremap <leader>n :noh<CR>
 nnoremap <leader>g :Gstatus<CR>
+nnoremap <leader>u :UndotreeToggle<CR>
+nnoremap <leader>b :CtrlPBuffer<CR>
+nnoremap <leader>p :CtrlP<CR>
+nnoremap <leader>m :CtrlPMRU<CR>
+
+
+" Alternate
+nnoremap <F4> :Alternate<CR>
+
+" open current file in nerdtree
+nnoremap <leader>` :Nuake<CR>
+tnoremap <leader>` <C-\><C-n>:Nuake<CR>
+tnoremap <Esc> <C-\><C-n>
+
+nnoremap <localleader><localleader> :NERDTreeFind<CR>
+nnoremap <localleader>' :Vista!!<CR> 
+nnoremap <leader>e :NERDTreeToggle<CR>
+nnoremap <leader><leader> <C-^>
+" nnoremap <silent> - :Dirvish<CR>
+" no me funcionan los jumps con esta solucion
+" nnoremap <silent> - :silent edit <C-R>=empty(expand('%')) ? '.' : expand('%:p:h')<CR><CR>
+" nmap <buffer> <expr> - g:NERDTreeMapUpdir
+
+
+if has('nvim')
+  cnoremap <A-b> <S-Left>
+  cnoremap <A-f> <S-Right>
+endif
+
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+
+nnoremap <LocalLeader>e :edit <C-R>=expand('%:p:h') . '/'<CR>
+
+nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k'
+nnoremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j'

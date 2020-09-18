@@ -1,3 +1,16 @@
 .gitconfig
 bundle/
 .netrwhist
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+.scannerwork/
+*.un~
+*.swo
+*.swp
+*.pyc
+tmp/
+undo/
+sessions/

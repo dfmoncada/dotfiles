@@ -1,45 +1,172 @@
 " vim:ft=vim
+
+let g:session_autoload = 'yes'
+let g:session_autosave = 'yes'
+let g:session_autosave_to = 'default'
+
+scriptencoding utf-8
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-set rtp+=$HOME/.vim/bundle/Vundle.vim
-let g:powerline_pycmd = 'py3'
-set nu rnu
+set autoindent                        " maintain indent of current line
+set backspace=indent,start,eol        " allow unrestricted backspacing in insert mode
+
+if exists('$SUDO_USER')
+  set nobackup                        " don't create root-owned files
+  set nowritebackup                   " don't create root-owned files
+else
+  set backupdir=~/.vim/tmp/backup     " keep backup files out of the way
+  set backupdir+=.
+endif
+
+if has('wildignore')
+  set backupskip+=*.re,*.rei          " prevent bsb's watch mode from getting confused
+  set wildignore+=*.o,*.rej           " patterns to ignore during file-navigation
+endif
+
+if exists('+colorcolumn')
+  " Highlight up to 255 columns (this is the current Vim max) beyond 'textwidth'
+  let &l:colorcolumn='+' . join(range(0, 254), ',+')
+endif
+
+set noswapfile                      " don't create root-owned files
+" if exists('$SUDO_USER')
+"   set noswapfile                      " don't create root-owned files
+" else
+"   set directory=~/.vim/tmp/swap//     " keep swap files out of the way
+"   set directory+=.
+" endif
+
+set noemoji                           " don't assume all emoji are double width
+set expandtab                         " always use spaces instead of tabs
+
+set cursorline                        " highlight current line
+set diffopt+=foldcolumn:0             " don't show fold column in diff view
+
+if has('folding')
+  if has('windows')
+    set fillchars=diff:∙               " BULLET OPERATOR (U+2219, UTF-8: E2 88 99)
+    set fillchars+=fold:·              " MIDDLE DOT (U+00B7, UTF-8: C2 B7)
+    set fillchars+=vert:┃              " BOX DRAWINGS HEAVY VERTICAL (U+2503, UTF-8: E2 94 83)
+  endif
+
+  if has('nvim-0.3.1')
+    set fillchars+=eob:\              " suppress ~ at EndOfBuffer
+  endif
+
+  set foldmethod=indent               " not as cool as syntax, but faster
+  set foldlevelstart=99               " start unfolded
+  " set foldtext=wincent#settings#foldtext()
+endif
+
+if v:version > 703 || v:version == 703 && has('patch541')
+  set formatoptions+=j                " remove comment leader when joining comment lines
+endif
+
+set formatoptions+=n                  " smart auto-indenting inside numbered lists
+
+if exists('&inccommand')
+  set inccommand=split                " live preview of :s results
+endif
+
+set laststatus=2                      " always show status line
+set lazyredraw                        " don't bother updating screen during macro playback
+
+set scrolloff=3                       " start scrolling 3 lines before edge of viewport
+set shell=zsh                         " shell to use for `!`, `:!`, `system()` etc.
+set noshiftround                      " don't always indent by multiple of shiftwidth
+set shiftwidth=2                      " spaces per tab (when shifting)
+set shortmess+=A                      " ignore annoying swapfile messages
+set shortmess+=I                      " no splash screen
+set shortmess+=O                      " file-read message overwrites previous
+set shortmess+=T                      " truncate non-file messages in middle
+set shortmess+=W                      " don't echo "[w]"/"[written]" when writing
+set shortmess+=a                      " use abbreviations in messages eg. `[RO]` instead of `[readonly]`
+set shortmess+=c                    " completion messages
+set shortmess+=o                      " overwrite file-written messages
+set shortmess+=t                      " truncate file messages at start
+
+if has('linebreak')
+  let &showbreak='↳ '                 " DOWNWARDS ARROW WITH TIP RIGHTWARDS (U+21B3, UTF-8: E2 86 B3)
+endif
+
+if has('showcmd')
+  set noshowcmd                       " don't show extra info at end of command line
+endif
+
 syntax on
-filetype plugin indent on    " required
+
+set rtp+=$HOME/.vim/bundle/Vundle.vim
 
 set ignorecase
 set smartcase
 " set listchars=tab:▸\ ,eol:¬,trail:◦
+
 set list
-set tabstop=2 shiftwidth=2 expandtab
+set listchars=nbsp:⦸                  " CIRCLED REVERSE SOLIDUS (U+29B8, UTF-8: E2 A6 B8)
+set listchars+=tab:▷┅                 " WHITE RIGHT-POINTING TRIANGLE (U+25B7, UTF-8: E2 96 B7)
+set listchars+=extends:»              " RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK (U+00BB, UTF-8: C2 BB)
+set listchars+=precedes:«             " LEFT-POINTING DOUBLE ANGLE QUOTATION MARK (U+00AB, UTF-8: C2 AB)
+set listchars+=trail:•                " BULLET (U+2022, UTF-8: E2 80 A2)
+                                      " + BOX DRAWINGS HEAVY TRIPLE DASH HORIZONTAL (U+2505, UTF-8: E2 94 85)
+set modelines=5                       " scan this many lines looking for modeline
+set nojoinspaces                      " don't autoinsert two spaces after '.', '?', '!' for join command
+set nu rnu                            " show line numbers in gutter
+
+set sidescroll=0                      " sidescroll in jumps because terminals are slow
+set sidescrolloff=3                   " same as scrolloff, but for columns
+set smarttab                          " <tab>/<BS> indent/dedent in leading whitespace
+
+set softtabstop=-1                  " use 'shiftwidth' for tab/bs at end of line
+set splitbelow                      " open horizontal splits below current window
+set splitright                      " open vertical splits to the right of the current window
+set switchbuf=usetab                  " try to reuse windows/tabs when switching buffers
+set synmaxcol=200                   " don't bother syntax highlighting long lines
+set tabstop=2                         " spaces per tab
+
+" set textwidth=80                      " automatically hard wrap at 80 columns
+
+if has('persistent_undo')
+  if exists('$SUDO_USER')
+    set noundofile                    " don't create root-owned files
+  else
+    set undodir=~/.vim/tmp/undo       " keep undo files out of the way
+    set undodir+=.
+    set undofile                      " actually use undo files
+  endif
+endif
+
+set updatecount=80                    " update swapfiles every 80 typed chars
+set updatetime=2000                   " CursorHold interval
+
+
 set nofixendofline
 set hidden
 set nobackup
 set nowritebackup
 set updatetime=300
-set shortmess+=c
 set signcolumn=yes
+"ACA
 
 
 set mouse=a
-map <silent> <C-\> :NERDTreeToggle<CR>
 set laststatus=2
 set hlsearch
 set incsearch
 set cindent
 
 set showcmd
-set foldmethod=indent
-set foldlevel=2
 " set foldclose=all
 
 " autocomplete
-set wildmode=longest,list,full
+set wildmode=longest:full,full        " shell-like autocomplete to unambiguous portion
 set wildmenu
 
 " wildignore
 set wildignore+=*/node_modules/*
+set wildignore+=*/dist/*
+set wildignore+=*/build/*
+set wildignore+=*/builds/*
 set wildignore+=*/vendor/*
 set wildignore+=*.swp
 
@@ -47,7 +174,8 @@ set wildignore+=*.swp
 set clipboard=unnamed
 
 " colors
-set  t_Co=256
+set t_Co=256
+set termguicolors
 
 
 " for faster escape
@@ -57,8 +185,84 @@ set path+=**
 
 
 "substitute highlight/preview
-set inccommand=nosplit
+if has('nvim')
+  set inccommand=nosplit
+endif
 
 " Nerdtree bookmarks behavior
 let NERDTreeChDirMode=2
+let g:NERDTreeMinimalUI=1
+let g:NERDTreeCreatePrefix='silent keepalt keepjumps'
+let g:startify_change_to_dir = 0
 let g:vim_jsx_pretty_colorful_config = 1
+let g:coc_start_at_startup = 1
+let g:dirvish_mode = ':silent keeppatterns g/\.un.$/d _ | sort ,^.*/,'
+" let g:dirvish_mode = ':sort ,^.*/,'
+let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+let g:vista_default_executive = 'coc'
+
+
+
+" autocmd FileType java :set fmr=/**,*/ fdm=marker fdc=1
+highlight link JavaIdentifier NONE
+autocmd Filetype java AnyFoldActivate
+set foldlevel=1
+let g:airline_section_b=''
+let g:airline_section_x=''
+let g:airline_section_y=''
+let g:airline_section_z=''
+let g:airline_skip_empty_section=1
+" let g:NERDTreeWinPos = "right"
+let g:AlternateExtensionMappings = [{'.ts': '.html', '.html': '.ts'}]
+
+augroup highlight_yank
+    autocmd!
+    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank("IncSearch", 250)
+augroup END
+
+highlight Comment cterm=italic gui=italic
+
+if has('mksession')
+  set viewdir=~/.vim/tmp/view         " override ~/.vim/view default
+  set viewoptions=cursor,folds        " save/restore just these (with `:{mk,load}view`)
+endif
+
+
+if has('viminfo') " ie. Vim.
+  let s:viminfo='viminfo'
+elseif has('shada') " ie. Neovim.
+  let s:viminfo='shada'
+endif
+
+if exists('s:viminfo')
+  if exists('$SUDO_USER')
+    " Don't create root-owned files.
+    execute 'set ' . s:viminfo . '='
+  else
+    " Defaults:
+    "   Neovim: !,'100,<50,s10,h
+    "   Vim:    '100,<50,s10,h
+    "
+    " - ! save/restore global variables (only all-uppercase variables)
+    " - '100 save/restore marks from last 100 files
+    " - <50 save/restore 50 lines from each register
+    " - s10 max item size 10KB
+    " - h do not save/restore 'hlsearch' setting
+    "
+    " Our overrides:
+    " - '0 store marks for 0 files
+    " - <0 don't save registers
+    " - f0 don't store file marks
+    " - n: store in ~/.vim/tmp
+    "
+    execute 'set ' . s:viminfo . "='0,<0,f0,n~/.vim/tmp/" . s:viminfo
+
+    if !empty(glob('~/.vim/tmp/' . s:viminfo))
+      if !filereadable(expand('~/.vim/tmp/' . s:viminfo))
+        echoerr 'warning: ~/.vim/tmp/' . s:viminfo . ' exists but is not readable'
+      endif
+    endif
+  endif
+endif
+
+set undodir=~/.vim/undo
