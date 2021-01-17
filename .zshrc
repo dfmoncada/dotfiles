@@ -156,3 +156,8 @@ function -auto-ls-after-cd() {
 }
 add-zsh-hook chpwd -auto-ls-after-cd
 
+setopt no_aliases
+source $HOME/.nvm/nvm.sh
+setopt aliases
+
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
