@@ -25,31 +25,37 @@ function tmux() {
   tmux new -A -s "$SESSION_NAME"
 }
 
-
-function iaur() {
-  git clone "https://aur.archlinux.org/$1.git" "$HOME/sources/$1"
-  cd "$HOME/sources/$1"
-  makepkg -si
-  cd -
+function +vi-git-untracked() {
+  emulate -L zsh
+  if [[ -n $(git ls-files --exclude-standard --others 2> /dev/null) ]]; then
+    hook_com[unstaged]+="%F{blue}●%f"
+  fi
 }
 
-# should be in project
-# will probable change with .tmux inside projects
-function setup_sldesk () {
-  tmux -2 new-session -d -s sldesk -n API
-  tmux send-keys "cd $slapi" C-m "clear" C-m
-  tmux new-window -t sldesk -n FE
-  tmux send-keys "cd $slfe" C-m "clear" C-m
+
+# Anonymous function to avoid leaking variables.
+function () {
+  # Check for tmux by looking at $TERM, because $TMUX won't be propagated to any
+  # nested sudo shells but $TERM will.
+  local TMUXING=$([ ! -z $TMUX ] && echo tmux)
+  if [ -n "$TMUXING" -a -n "$TMUX" ]; then
+    # In a a tmux session created in a non-root or root shell.
+    local LVL=$(($SHLVL - 1))
+  else
+    # Either in a root shell created inside a non-root tmux session,
+    # or not in a tmux session.
+    local LVL=$SHLVL
+  fi
+  if [[ $EUID -eq 0 ]]; then
+    local SUFFIX='%F{yellow}%n%f'$(printf '%%F{yellow}\u276f%.0s%%f' {1..$LVL})
+  else
+    local SUFFIX=$(printf '%%F{red}\u276f%.0s%%f' {1..$LVL})
+  fi
+  export PS1="%F{green}${SSH_TTY:+%n@%m}%f%B${SSH_TTY:+:}%b%F{blue}%B%1~%b%F{yellow}%B%(1j.*.)%(?..!)%b%f %B${SUFFIX}%b "
+  if [[ -n "$TMUXING" ]]; then
+    # Outside tmux, ZLE_RPROMPT_INDENT ends up eating the space after PS1, and
+    # prompt still gets corrupted even if we add an extra space to compensate.
+    export ZLE_RPROMPT_INDENT=0
+  fi
 }
 
-function setup_sldesk_servers () {
-  tmux -2 new-session -d -s irwin_servers -n servers
-  tmux send-keys "cd $slapi" C-m "clear" C-m "rails s" C-m
-  tmux split-window -h
-  tmux send-keys "cd $slfe" C-m "clear" C-m "npm start" C-m
-}
-
-function sldesk_tmux() {
-  setup_sldesk
-  setup_sldesk_servers
-}

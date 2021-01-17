@@ -3,17 +3,25 @@ plugins=(
   git
   # bundler
   rbenv
-  pip
-  dotenv
-  osx
+  # pip
+  # dotenv
+  # osx
   rake
   ruby
   zsh-better-npm-completion
   zsh-completions
+  zsh-autosuggestions
+  zsh-syntax-highlighting
   docker
   docker-compose
   npm
   fzf
   # tmux
   # fzf-zsh
+  postgres
+  mvn
+  aws
+  heroku
+  kops
+  terraform
 )

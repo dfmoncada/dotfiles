@@ -42,6 +42,7 @@ set expandtab                         " always use spaces instead of tabs
 
 set cursorline                        " highlight current line
 set diffopt+=foldcolumn:0             " don't show fold column in diff view
+set conceallevel=0
 
 if has('folding')
   if has('windows')
@@ -196,7 +197,7 @@ let g:NERDTreeCreatePrefix='silent keepalt keepjumps'
 let g:startify_change_to_dir = 0
 let g:vim_jsx_pretty_colorful_config = 1
 let g:coc_start_at_startup = 1
-let g:dirvish_mode = ':silent keeppatterns g/\.un.$/d _ | sort ,^.*/,'
+let g:dirvish_mode = ':sort | sort ,^.*[^/]$, r'
 " let g:dirvish_mode = ':sort ,^.*/,'
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 let g:vista_default_executive = 'coc'
@@ -213,7 +214,7 @@ let g:airline_section_y=''
 let g:airline_section_z=''
 let g:airline_skip_empty_section=1
 " let g:NERDTreeWinPos = "right"
-let g:AlternateExtensionMappings = [{'.ts': '.html', '.html': '.ts'}]
+let g:AlternateExtensionMappings = [{'.component.ts': '.component.html', '.component.html': '.component.ts'}]
 
 augroup highlight_yank
     autocmd!

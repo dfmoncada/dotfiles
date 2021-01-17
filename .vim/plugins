@@ -38,6 +38,7 @@ call vundle#begin()
   Plugin 'xolox/vim-colorscheme-switcher'
 
   Plugin 'MaxMEllon/vim-jsx-pretty'
+  Plugin 'sheerun/vim-polyglot'
   Plugin 'uiiaoo/java-syntax.vim'
   Plugin 'curist/vim-angular-template'
   Plugin 'hashivim/vim-terraform'
@@ -53,7 +54,8 @@ call vundle#begin()
   Plugin 'ivalkeen/vim-ctrlp-tjump'
 
   Plugin 'xolox/vim-misc'
-  Plugin 'xolox/vim-session'
+  " Plugin 'xolox/vim-session'
+  Plugin 'benmills/vimux'
 call vundle#end()            " required
 
 "srcery
