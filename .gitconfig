@@ -1,0 +1,179 @@
+# vim: set nomodifiable : DO NOT EDIT - edit template source instead (/home/diegos/playground/wincent/aspects/dotfiles/templates/.gitconfig.erb) or use `:set modifiable` to force.
+
+[alias]
+	abbrev = !sh -c 'git rev-parse --short ${1-`echo HEAD`}' -
+	ack = grep --break --heading
+	amend = commit --amend -v
+	both = diff --ignore-submodules=dirty HEAD
+	br = branch
+	ci = commit -v
+	co = checkout
+	count = !git --no-pager log --oneline | wc -l
+	cp = cherry-pick
+
+	# http://stackoverflow.com/questions/224687/git-find-duplicate-blobs-files-in-this-tree/8408640#8408640
+	dupes = !"git ls-tree -r HEAD | cut -c 13- | sort | uniq -D -w 40"
+
+	ff = merge --ff-only
+	fixup = !sh -c 'git commit --fixup=$1 ${@:2}' -
+	fresh = remote update --prune
+	full = show --format=fuller
+
+	# Shortcut for updating all remotes and fast-forwarding to a specific one:
+	# eg. `git get upstream/master`
+	get = "!f() { git fresh && git ff \"$@\"; }; f"
+
+	# equivalent to: graph --all
+	gr = !git --paginate log --graph --all --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %s %C(magenta bold)(%cr)%Creset %C(cyan)<%aN>%Creset'
+
+	# requires Git 1.6.3 or later; %C(auto) requires Git 1.8.3 or later
+	graph = !git --paginate log --graph --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %s %C(magenta bold)(%cr)%Creset %C(cyan)<%aN>%Creset'
+
+	# Show just the HEAD commit message (no indent) and nothing else
+	message = !git --paginate log -1 --pretty=format:%B
+	msg = message
+
+	no-edit = commit --amend --no-edit
+
+	# %C(auto) requires Git 1.8.3 or later
+	one = !git --paginate log --pretty=format:'%C(auto)%h%Creset %s%C(auto)%d%Creset %C(magenta bold)(%cr)%Creset %C(cyan)<%aN>%Creset'
+	oneline = !git --paginate log --pretty=format:'%C(auto)%h%Creset %s%C(auto)%d%Creset %C(magenta bold)(%cr)%Creset %C(cyan)<%aN>%Creset'
+
+	# requires Git 1.5.4 or later
+	p = add -p
+	patch = add -p
+
+	# requires Git 1.7.11.3 or later
+	reword = commit --amend --only -v --
+
+	# requires Git 1.6.2 or later
+	rollback = !sh -c 'git reset --merge HEAD~${1-1}' -
+
+	# "smartlog", although it's not that smart.
+	# Equivalent to `git graph --all --simplify-by-decoration.
+	sl = !git --paginate log --graph --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %s %C(magenta bold)(%cr)%Creset %C(cyan)<%aN>%Creset' --all --simplify-by-decoration
+
+	st = status -s
+	staged = diff --cached --ignore-submodules=dirty
+
+	# %C(auto) requires Git 1.8.3 or later
+	ten = !git --paginate log -10 --pretty=format:'%C(auto)%h%Creset%C(auto)%d%Creset %s %C(magenta bold)(%cr)%Creset %C(cyan)<%aN>%Creset'
+
+	# compensate for brain damage caused by using Mercurial
+	up = checkout
+
+	wc = whatchanged
+
+	# similar to whatchanged, but gives a dir-level overview (takes param to
+	# diff against; defaults to HEAD if not provided)
+	wd = !git --paginate diff --dirstat=cumulative,files,0
+
+[branch]
+	autosetupmerge = always
+	autosetuprebase = local
+
+[branch "master"]
+	rebase = true
+
+[color]
+	ui = auto
+
+[color "diff-highlight"]
+	newhighlight = reverse
+	newreset = noreverse
+	oldhighlight = reverse
+	oldreset = noreverse
+
+[color "interactive"]
+	prompt = blue reverse
+
+[color "status"]
+	untracked = blue
+
+[core]
+	attributesfile = ~/.gitattributes
+	excludesfile = ~/.gitignore
+
+	# S = chop long lines (rather than wrap them onto next line)
+	#
+	# This in addition to the "iFMRX" that we get via LESS environment variable.
+	# (In the absence LESS, Git would use "FRX".)
+	pager = less -S
+
+# ignored by Git older than 1.8.2
+[diff]
+	algorithm = histogram
+
+	# Added in Git 2.9.0 (experimental): more readable diffs.
+	compactionHeuristic = true
+
+[difftool]
+	prompt = false
+
+[grep]
+	lineNumber = true
+
+	# Requires PCRE support; ie: `brew install git --with-pcre` (on macOS).
+	patternType = perl
+
+[help]
+	autocorrect = 2
+
+[interactive]
+  #diffFilter = diff-highlight
+
+[log]
+	decorate = short
+
+[merge]
+	conflictStyle = diff3
+	log = 1000
+
+[pager]
+	diff = ~/.zsh/bin/diff-highlight | menos -iFMRSX --pattern='^(commit|diff)'
+	log = ~/.zsh/bin/diff-highlight | menos -iFMRSX --pattern='^(commit|diff)'
+	show = ~/.zsh/bin/diff-highlight | menos -iFMRSX --pattern='^(commit|diff)'
+	show-branch = true
+	status = true
+	whatchanged = ~/.zsh/bin/diff-highlight | menos -iFMRSX --pattern='^(commit|diff)'
+
+[protocol]
+	# Added in Git 2.18.0.
+	version = 2
+
+[push]
+	# Added in Git 1.7.11, default in 2.0, but still required (to avoid warning).
+	default = current
+
+[rebase]
+	autosquash = true
+
+[rerere]
+	enabled = true
+
+[sendemail]
+	smtpEncryption = tls
+	smtpServer = smtp.gmail.com
+	smtpServerPort = 587
+
+[status]
+	submodulesummary = true
+
+[submodule]
+	# Added in Git 2.9.0.
+	fetchJobs = 4
+
+[user]
+	email = dfmoncada@gmail.com
+	name = Diego Moncada
+
+# ignored by Git older than 1.7.10
+[include]
+	path = .gitconfig.local
+
+[credential]
+	helper = store
+[pull]
+	rebase = true
+[advice]
+	addIgnoredFile = false

@@ -33,7 +33,7 @@ function precmd () { vcs_info }
 bindkey -e # emacs bindings, set to -v for vi bindings
 
 # AUTOMCOMPLETE
-source ~/code/personal/scripts/*completion.bash
+# source ~/code/personal/scripts/*completion.bash
 
 zstyle ':completion:*' list-colors ''
 zstyle -e ':completion:*' special-dirs '[[ $PREFIX = (../)#(..) ]] && reply=(..)'
