@@ -36,6 +36,8 @@ call vundle#begin()
   Plugin 'Lenovsky/nuake'
   Plugin 'xolox/vim-notes'
   Plugin 'xolox/vim-colorscheme-switcher'
+  Plugin 'chrisbra/colorizer'
+  Plugin 'chrisbra/unicode.vim'
 
   Plugin 'MaxMEllon/vim-jsx-pretty'
   Plugin 'sheerun/vim-polyglot'

@@ -32,6 +32,8 @@ nnoremap <leader>b :CtrlPBuffer<CR>
 nnoremap <leader>p :CtrlP<CR>
 nnoremap <leader>m :CtrlPMRU<CR>
 nnoremap <leader>vp :VimuxPromptCommand<CR>
+nnoremap <silent> <leader>l :bnext<CR>
+nnoremap <silent> <leader>h :bprevious<CR>
 
 " translates
 nnoremap <leader>t1 "tdi":let @y=trim(system("trans :es -brief '<C-r>t'"))<CR>"yP
@@ -43,13 +45,17 @@ nnoremap <leader>t3 "tdi":let @y=trim(system("trans :pt -brief '<C-r>t'"))<CR>"y
 nnoremap <F4> :Alternate<CR>
 
 " open current file in nerdtree
-nnoremap <leader>` :Nuake<CR>
-tnoremap <leader>` <C-\><C-n>:Nuake<CR>
+" nnoremap <leader>` :Nuake<CR>
+" tnoremap <leader>` <C-\><C-n>:Nuake<CR>
+nnoremap  :Nuake<CR>
+tnoremap  <C-\><C-n>:Nuake<CR>
+nnoremap <C-c>` :Nuake<CR>
 tnoremap <Esc> <C-\><C-n>
 
 nnoremap <localleader><localleader> :NERDTreeFind<CR>
 nnoremap <localleader>' :Vista!!<CR> 
-nnoremap <leader>e :NERDTreeToggle<CR>
+nnoremap <silent> <leader>e :CocCommand explorer --toggle --sources=buffer+,file+<CR>
+nnoremap <silent> <Leader>er :call CocAction('runCommand', 'explorer.doAction', 'closest', ['reveal:0'], [['relative', 0, 'file']])<CR>
 nnoremap <leader><leader> <C-^>
 " nnoremap <silent> - :Dirvish<CR>
 " no me funcionan los jumps con esta solucion
@@ -69,3 +75,43 @@ nnoremap <LocalLeader>e :edit <C-R>=expand('%:p:h') . '/'<CR>
 
 nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k'
 nnoremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j'
+
+let g:coc_explorer_global_presets = {
+\   '.vim': {
+\     'root-uri': '~/.vim',
+\   },
+\   'cocConfig': {
+\      'root-uri': '~/.config/coc',
+\   },
+\   'tab': {
+\     'position': 'tab',
+\     'quit-on-open': v:true,
+\   },
+\   'floating': {
+\     'position': 'floating',
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'floatingTop': {
+\     'position': 'floating',
+\     'floating-position': 'center-top',
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'floatingLeftside': {
+\     'position': 'floating',
+\     'floating-position': 'left-center',
+\     'floating-width': 50,
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'floatingRightside': {
+\     'position': 'floating',
+\     'floating-position': 'right-center',
+\     'floating-width': 50,
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'simplify': {
+\     'file-child-template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
+\   },
+\   'buffer': {
+\     'sources': [{'name': 'buffer', 'expand': v:true}]
+\   },
+\ }

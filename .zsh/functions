@@ -59,3 +59,10 @@ function () {
   fi
 }
 
+function set_token() {
+  export token=`curl 'https://api-dev.myhotel.io/security/login' \
+    -H 'x-api-key: Upy1BTFzD63LFLzlkeCy72gFJokPrUGC4ZLUtbIq' \
+    -H 'content-type: application/json' \
+    --data-raw '{"username":"diego@myhotel.com.es","password":"4cda67c9f1dc4ba1b675838c0ba96ad7"}' |
+    jq --raw-output '.token'`
+}

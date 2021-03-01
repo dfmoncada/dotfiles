@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 6
+font pango:monospace 12
 # font pango:DejaVu Sans Mono 40
 # font pango: Monospace 40
 # font pango:Inconsolata 30px
@@ -34,10 +34,11 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec tilix
+bindsym $mod+Shift+Return exec tilix -q
 
 # start chromium
 # bindsym $mod+c exec firefox
-bindsym $mod+c exec chromium
+bindsym $mod+c exec google-chrome-stable
 # bindsym $mod+i exec zsh -e "$HOME/scripts/sservers"
 # bindsym $mod+i exec gnome-terminal --working-directory $HOME/scripts -- zsh -c './sservers' \
 bindsym $mod+i exec $HOME/scripts/sservers
@@ -48,7 +49,8 @@ bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run -b -nb "#002b36" -nf "#657b83" -sb "#073642" -sf "#fdf6e3" -fn "-misc-fixed-medium-r-normal--30-120-75-75-C-70-iso10646-1"
 # bindsym $mod+d exec dmenu_run -b -nb "#002b36" -nf "#657b83" -sb "#073642" -sf "#fdf6e3" -fn "Dejavu-15"
-bindsym $mod+d exec i3-dmenu-desktop --dmenu='dmenu -i -b -nb "#002b36" -nf "#657b83" -sb "#073642" -sf "#fdf6e3" -fn "Dejavu-8"'
+# bindsym $mod+d exec i3-dmenu-desktop --dmenu='dmenu -i -b -nb "#002b36" -nf "#657b83" -sb "#073642" -sf "#fdf6e3" -fn "Dejavu-8"'
+bindsym $mod+d exec "rofi -show drun -show-icons -modi drun,window -width 40 -font 'Fira Code 20'"
 # bindsym $mod+d exec i3-dmenu-desktop -b -nb "#002b36" -nf "#657b83" -sb "#073642" -sf "#fdf6e3" -fn "Dejavu-20"
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
@@ -68,16 +70,16 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+bindsym $mod+Shift+h move left 50px
+bindsym $mod+Shift+j move down 50px
+bindsym $mod+Shift+k move up 50px
+bindsym $mod+Shift+l move right 50px
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+Left move left 50px
+bindsym $mod+Shift+Down move down 50px
+bindsym $mod+Shift+Up move up 50px
+bindsym $mod+Shift+Right move right 50px
 
 # split in horizontal orientation
 bindsym $mod+b split h
@@ -101,22 +103,13 @@ bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
+bindsym $mod+Shift+a focus child
 
 # focus the child container
-#bindsym $mod+d focus child
+# bindsym $mod+d focus child
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-# set $ws1 "1"
-# set $ws2 "2"
-# set $ws3 "3"
-# set $ws4 "4"
-# set $ws5 "5"
-# set $ws6 "6"
-# set $ws7 "7"
-# set $ws8 "8"
-# set $ws9 "9"
-# set $ws10 "10"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -147,7 +140,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -157,38 +150,55 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 50 px or 5 ppt
+        bindsym j resize grow height 50 px or 5 ppt
+        bindsym k resize shrink height 50 px or 5 ppt
+        bindsym l resize grow width 50 px or 5 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width 20 px or 5 ppt
+        bindsym Down resize grow height 20 px or 5 ppt
+        bindsym Up resize shrink height 20 px or 5 ppt
+        bindsym Right resize grow width 20 px or 5 ppt
 
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
 }
-
 bindsym $mod+r mode "resize"
+
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id i3exit lock, mode "default"
+    bindsym e exec --no-startup-id i3exit logout, mode "default"
+    bindsym s exec --no-startup-id i3exit suspend, mode "default"
+    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Shift+e mode "$mode_system"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-# bar {
-  # font pango:Inconsolata 14
-  # position top
+bar {
+  font pango:Inconsolata 14
+  position top
+  status_command i3status
   # status_command /usr/share/bumblebee-status/bumblebee-status -m nic disk:root cpu memory battery date time pasink pacman -p root.path=/home/diego time.format="%H:%M" date.format="%a, %b %d %Y" -t solarized
   # status_command /usr/share/bumblebee-status/bumblebee-status -m nic disk:root cpu memory battery date time pasink pacman -p root.path=/home/diego time.format="%H:%M" date.format="%a, %b %d %Y" -t solarized-powerline
   # status_command /usr/share/bumblebee-status/bumblebee-status -m cpu memory battery date time pasink pacman -p root.path=/home/diego time.format="%H:%M" date.format="%a, %b %d %Y" -t solarized-powerline
 # others: pasource: microphone, in time format, %V is for Current week
-# }
+}
 
 bindsym Print exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f ~/Pictures/'
 bindsym Control+Print exec gnome-screenshot -i
+bindsym Shift+Print exec flameshot gui
+bindsym $mod+m bar mode toggle
 
 # tap click on touchpad
 exec xinput set-prop 12 283 1
@@ -208,8 +218,8 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 default_border pixel 3
 
 # i3-gaps
-# gaps inner 4
-# gaps outer 2
+gaps inner 4
+gaps outer 2
 
 # lock
 bindsym Control+Mod1+l exec --no-startup-id i3lock -c 000000 -d
@@ -218,6 +228,9 @@ bindsym Control+Mod1+l exec --no-startup-id i3lock -c 000000 -d
 # TODO: should change the path, but will figure that out later
 bindsym $mod+Shift+s exec $HOME/dotfiles/i3/swap_workspaces.py
 # bindsym $mod+i exec $HOME/scripts/sservers
+
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
 
 # WorkSpaces Icons
 set $ws1 "1:"
@@ -237,12 +250,15 @@ exec --no-startup-id compton
 exec --no-startup-id clipit -d
 # Network tool
 exec nm-applet
+exec --no-startup-id blueman-applet
+exec --no-startup-id clipit
+exec --no-startup-id volumeicon
 # lower resolution
 exec xrandr --output DP-2 --scale 0.8x0.8
 
 # bacground
 # exec_always feh --bg-scale ~/Pictures/crab-wallpaper.jpg
-exec_always feh -Z --bg-scale ~/Pictures/rickandmorty.png
+exec_always feh -Z --bg-scale ~/Downloads/wallpapers-background-linux-format-10647.jpg
 
 # transparency
 exec_always xcompmgr -c
@@ -257,3 +273,11 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh example
 # exec_always --no-startup_id xmodmap -e "clear lock" #disable caps lock switch
 # exec_always --no-startup_id xmodmap -e "keysym Caps_Lock = Escape" #set caps_lock as escape
 bindsym $mod+z focus child
+
+
+# class                 border  backgr. text    indicator child_border
+client.focused          #4c7899 #285577 #ffffff #2e9ef4   #722433
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c

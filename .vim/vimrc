@@ -9,8 +9,9 @@ source $HOME/.vim/styles
 " colorscheme molokai
 " colorscheme base16-google-dark
 " colorscheme base16-dracula
-colorscheme base16-default-dark
-colorscheme base16-ocean
+" colorscheme base16-default-dark
+" colorscheme base16-ocean
+colorscheme base16-monokai
 " colorscheme palenight
 " colorscheme gruvbox
 " colorscheme base16
