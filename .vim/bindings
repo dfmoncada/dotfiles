@@ -2,6 +2,9 @@ let mapleader = " "
 let maplocalleader = "\\"
 " vim:ft=vim
 noremap Y y$
+" Bind <leader>y to forward last-yanked text to Clipper
+nnoremap <leader>y :call system('nc localhost 8377', @0)<CR>
+
 nnoremap <C-j> <C-W>j
 nnoremap <C-k> <C-W>k
 nnoremap <C-l> <C-W>l
@@ -22,16 +25,23 @@ map Q <Nop>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>x :wq<CR>
 nnoremap <leader>q :q<CR>
+nnoremap <leader>Q :%bd<CR>
 
 " easier Gstatus
-nnoremap <leader>g :Gstatus<CR>
+nnoremap <leader>g :Git<CR>
 
-nnoremap <leader>n :noh<CR>
-nnoremap <leader>u :UndotreeToggle<CR>
-nnoremap <leader>b :CtrlPBuffer<CR>
-nnoremap <leader>p :CtrlP<CR>
-nnoremap <leader>m :CtrlPMRU<CR>
-nnoremap <leader>vp :VimuxPromptCommand<CR>
+nnoremap <leader>n <cmd>noh<CR>
+nnoremap <leader>u <cmd>UndotreeToggle<CR>
+nnoremap <leader>b <cmd>Telescope buffers<CR>
+nnoremap <leader>p <cmd>Telescope git_files<CR>
+nnoremap <leader>m <cmd>Telescope marks<CR>
+nnoremap <leader>f <cmd>Telescope live_grep<CR>
+nnoremap <leader>c <cmd>Telescope command_history<CR>
+nnoremap <leader>F <cmd>Telescope grep_string<CR><C-r>f
+nnoremap <leader>vp <cmd>VimuxPromptCommand<CR>
+nnoremap <S-Up> <Plug>(expand_region_expand)
+nnoremap <S-Down> <Plug>(expand_region_shrink)
+
 nnoremap <silent> <leader>l :bnext<CR>
 nnoremap <silent> <leader>h :bprevious<CR>
 
@@ -52,10 +62,18 @@ tnoremap  <C-\><C-n>:Nuake<CR>
 nnoremap <C-c>` :Nuake<CR>
 tnoremap <Esc> <C-\><C-n>
 
-nnoremap <localleader><localleader> :NERDTreeFind<CR>
-nnoremap <localleader>' :Vista!!<CR> 
-nnoremap <silent> <leader>e :CocCommand explorer --toggle --sources=buffer+,file+<CR>
-nnoremap <silent> <Leader>er :call CocAction('runCommand', 'explorer.doAction', 'closest', ['reveal:0'], [['relative', 0, 'file']])<CR>
+nnoremap <localleader><localleader> :NERDTreeToggle<CR>
+nnoremap <localleader><localleader> :NERDTreeToggle<CR>
+nnoremap <localleader>] :NERDTreeFind<CR>
+nnoremap <localleader>n :CocCommand explorer --toggle<CR>
+
+" nnoremap <silent> <leader>e :CocCommand explorer --toggle --sources=buffer+,file+<CR>
+nnoremap <silent> <leader>e :NERDTreeToggle<CR>
+
+
+" nnoremap <silent> <Up> <Plug>(coc-diagnostic-prev-error)
+" nnoremap <silent> <Down> <Plug>(coc-diagnostic-prev-error)
+" nnoremap <silent> <Leader>er :call CocAction('runCommand', 'explorer.doAction', 'closest', ['reveal:0'], [['relative', 0, 'file']])<CR>
 nnoremap <leader><leader> <C-^>
 " nnoremap <silent> - :Dirvish<CR>
 " no me funcionan los jumps con esta solucion

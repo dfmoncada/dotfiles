@@ -26,8 +26,10 @@ eval "$(rbenv init -)"
 # oh-my-sh
 
 
+source $HOME/.dockerrc
 source $ZSH/oh-my-zsh.sh
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+autoload -U compinit && compinit
 function precmd () { vcs_info }
 
 bindkey -e # emacs bindings, set to -v for vi bindings
@@ -161,3 +163,13 @@ source $HOME/.nvm/nvm.sh
 setopt aliases
 
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
+
+export PATH=/Users/diegos/.meteor:$PATH
+
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true

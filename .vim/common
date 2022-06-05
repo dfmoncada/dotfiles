@@ -56,7 +56,6 @@ if has('folding')
   endif
 
   set foldmethod=indent               " not as cool as syntax, but faster
-  set foldlevelstart=99               " start unfolded
   " set foldtext=wincent#settings#foldtext()
 endif
 
@@ -174,7 +173,7 @@ set wildignore+=*/vendor/*
 set wildignore+=*.swp
 
 " share clipboard with system
-set clipboard=unnamed
+" set clipboard=unnamed
 
 " colors
 set t_Co=256
@@ -196,6 +195,7 @@ endif
 let NERDTreeChDirMode=2
 let g:NERDTreeMinimalUI=1
 let g:NERDTreeCreatePrefix='silent keepalt keepjumps'
+let NERDTreeShowHidden=1
 let g:startify_change_to_dir = 0
 let g:vim_jsx_pretty_colorful_config = 1
 let g:coc_start_at_startup = 1
@@ -208,8 +208,7 @@ let g:vista_default_executive = 'coc'
 
 " autocmd FileType java :set fmr=/**,*/ fdm=marker fdc=1
 highlight link JavaIdentifier NONE
-autocmd Filetype java AnyFoldActivate
-set foldlevel=1
+" autocmd Filetype java AnyFoldActivate
 let g:airline_section_b=''
 let g:airline_section_x=''
 let g:airline_section_y=''
@@ -220,7 +219,7 @@ let g:AlternateExtensionMappings = [{'.component.ts': '.component.html', '.compo
 
 augroup highlight_yank
     autocmd!
-    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank("IncSearch", 250)
+    au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=250}
 augroup END
 
 highlight Comment cterm=italic gui=italic
@@ -231,41 +230,58 @@ if has('mksession')
 endif
 
 
-if has('viminfo') " ie. Vim.
-  let s:viminfo='viminfo'
-elseif has('shada') " ie. Neovim.
-  let s:viminfo='shada'
-endif
+"let s:viminfo='viminfo'
+"if has('viminfo') " ie. Vim.
+"  let s:viminfo='viminfo'
+"elseif has('shada') " ie. Neovim.
+"  let s:viminfo='shada'
+"endif
 
-if exists('s:viminfo')
-  if exists('$SUDO_USER')
-    " Don't create root-owned files.
-    execute 'set ' . s:viminfo . '='
-  else
-    " Defaults:
-    "   Neovim: !,'100,<50,s10,h
-    "   Vim:    '100,<50,s10,h
-    "
-    " - ! save/restore global variables (only all-uppercase variables)
-    " - '100 save/restore marks from last 100 files
-    " - <50 save/restore 50 lines from each register
-    " - s10 max item size 10KB
-    " - h do not save/restore 'hlsearch' setting
-    "
-    " Our overrides:
-    " - '0 store marks for 0 files
-    " - <0 don't save registers
-    " - f0 don't store file marks
-    " - n: store in ~/.vim/tmp
-    "
-    execute 'set ' . s:viminfo . "='0,<0,f0,n~/.vim/tmp/" . s:viminfo
+"if exists('s:viminfo')
+"  if exists('$SUDO_USER')
+"    " Don't create root-owned files.
+"    execute 'set ' . s:viminfo . '='
+"  else
+"    " Defaults:
+"    "   Neovim: !,'100,<50,s10,h
+"    "   Vim:    '100,<50,s10,h
+"    "
+"    " - ! save/restore global variables (only all-uppercase variables)
+"    " - '100 save/restore marks from last 100 files
+"    " - <50 save/restore 50 lines from each register
+"    " - s10 max item size 10KB
+"    " - h do not save/restore 'hlsearch' setting
+"    "
+"    " Our overrides:
+"    " - '0 store marks for 0 files
+"    " - <0 don't save registers
+"    " - f0 don't store file marks
+"    " - n: store in ~/.vim/tmp
+"    "
+"    execute 'set ' . s:viminfo . "='0,<0,f0,n~/.vim/tmp/" . s:viminfo
 
-    if !empty(glob('~/.vim/tmp/' . s:viminfo))
-      if !filereadable(expand('~/.vim/tmp/' . s:viminfo))
-        echoerr 'warning: ~/.vim/tmp/' . s:viminfo . ' exists but is not readable'
-      endif
-    endif
-  endif
-endif
+"    if !empty(glob('~/.vim/tmp/' . s:viminfo))
+"      if !filereadable(expand('~/.vim/tmp/' . s:viminfo))
+"        echoerr 'warning: ~/.vim/tmp/' . s:viminfo . ' exists but is not readable'
+"      endif
+"    endif
+"  endif
+"endif
 
 set undodir=~/.vim/undo
+
+let g:prettier#autoformat = 1
+let g:prettier#exec_cmd_async = 1
+let g:prettier#autoformat_require_pragma = 0
+
+" inoremap <silent><expr> <C-Space> compe#complete()
+" inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+" inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+" inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+" inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+
+" anyfold
+" autocmd Filetype * AnyFoldActivate
+let g:anyfold_fold_comments=1
+" set foldlevel=1
+hi Folded term=NONE cterm=NONE

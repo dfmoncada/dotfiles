@@ -1,23 +1,34 @@
-source $HOME/.vim/common
-source $HOME/.vim/plugins
-source $HOME/.vim/functions
-source $HOME/.vim/bindings
-source $HOME/.vim/coc
-source $HOME/.vim/plugin_functions.vim
-source $HOME/.vim/styles
+source $HOME/.config/nvim/common
+source $HOME/.config/nvim/plugins
+source $HOME/.config/nvim/functions
+source $HOME/.config/nvim/bindings
+source $HOME/.config/nvim/coc
+" lua require(os.getenv("HOME") .. "/Personal/dotfiles/.vim/lsp.lua")
+source $HOME/.config/nvim/plugin_functions.vim
+source $HOME/.config/nvim/styles
 
+lua require('lualine').setup()
+luafile /Users/macbookpro/Personal/dotfiles/.vim/diffview.lua
 " colorscheme molokai
 " colorscheme base16-google-dark
 " colorscheme base16-dracula
 " colorscheme base16-default-dark
 " colorscheme base16-ocean
-colorscheme base16-monokai
+" colorscheme base16-monokai
 " colorscheme palenight
-" colorscheme gruvbox
+colorscheme gruvbox
 " colorscheme base16
 " colorscheme atom-dark
 " colorscheme srcery
 " hi Normal ctermbg=none
 " hi CursorLine term=bold cterm=bold guibg=Grey40
+" luafile ~/.config/nvim/lsp.lua
 
 highlight Comment cterm=italic gui=italic
+
+""keep folds
+"augroup remember_folds
+"  autocmd!
+"  autocmd BufWinLeave *\(.git/COMMIT_EDITMSG\)\@<! mkview
+"  autocmd BufWinEnter * if &filetype != "TelescopeResults" && &filetype != "TelescopePrompt" silent! loadview
+"augroup END

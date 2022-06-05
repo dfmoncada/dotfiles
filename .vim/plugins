@@ -2,12 +2,15 @@
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+  Plugin 'tpope/vim-abolish'
   Plugin 'VundleVim/Vundle.vim'
   Plugin 'tpope/vim-fugitive'
   Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-  Plugin 'powerline/powerline'
-  Plugin 'powerline/powerline-fonts'
-  Plugin 'vim-airline/vim-airline'
+  " Plugin 'powerline/powerline'
+  " Plugin 'powerline/powerline-fonts'
+  " Plugin 'vim-airline/vim-airline'
+  Plugin 'nvim-lualine/lualine.nvim'
+  Plugin 'sindrets/diffview.nvim'
   Plugin 'tpope/vim-surround'
   Plugin 'scrooloose/nerdtree'
   Plugin 'tpope/vim-unimpaired'
@@ -16,15 +19,22 @@ call vundle#begin()
   Plugin 'tpope/vim-sensible'
   " Plugin 'Xuyuanp/nerdtree-git-plugin'
   Plugin 'chriskempson/base16-vim'
+  " Plugin 'https://github.com/adelarsq/neoline.vim'
   Plugin 'ayu-theme/ayu-vim'
   Plugin 'kana/vim-textobj-user'
+  Plugin 'michaeljsmith/vim-indent-object'
   Plugin 'nelstrom/vim-textobj-rubyblock'
   Plugin 'pangloss/vim-javascript'
+  Plugin 'jparise/vim-graphql'
   Plugin 'ntpeters/vim-better-whitespace'
   Plugin 'tpope/vim-repeat'
-  " Plugin 'ryanoasis/vim-devicons'
+  Plugin 'ryanoasis/vim-devicons'
+  " Plugin 'kyazdani42/nvim-web-devicons'
   Plugin 'ctrlpvim/ctrlp.vim'
   Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+  " Plugin 'neovim/nvim-lspconfig'
+  " Plugin 'hrsh7th/nvim-compe'
+  " Plugin 'nvim-lua/completion-nvim'
   Plugin 'SirVer/ultisnips'
   Plugin 'honza/vim-snippets'
   Plugin 'vim-scripts/CSApprox'
@@ -38,12 +48,21 @@ call vundle#begin()
   Plugin 'xolox/vim-colorscheme-switcher'
   Plugin 'chrisbra/colorizer'
   Plugin 'chrisbra/unicode.vim'
-
+  Plugin 'nvim-treesitter/nvim-treesitter'
   Plugin 'MaxMEllon/vim-jsx-pretty'
   Plugin 'sheerun/vim-polyglot'
   Plugin 'uiiaoo/java-syntax.vim'
+  Plugin 'digitaltoad/vim-pug'
   Plugin 'curist/vim-angular-template'
   Plugin 'hashivim/vim-terraform'
+  Plugin 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
+  Plugin 'terryma/vim-expand-region'
+  Plugin 'Yggdroot/indentLine'
+
+  Plugin 'nvim-lua/plenary.nvim'
+  Plugin 'nvim-telescope/telescope.nvim'
+  Plugin 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+  Plugin 'fannheyward/telescope-coc.nvim'
 
   Plugin 'alvan/vim-closetag'
   Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -54,23 +73,24 @@ call vundle#begin()
   Plugin 'junegunn/goyo.vim'
   Plugin 'justinmk/vim-dirvish'
   Plugin 'ivalkeen/vim-ctrlp-tjump'
+  Plugin 'morhetz/gruvbox'
+  " Plugin 'davidhalter/jedi-vim'
 
   Plugin 'xolox/vim-misc'
   " Plugin 'xolox/vim-session'
   Plugin 'benmills/vimux'
+  Plugin 'mhinz/vim-startify'
 call vundle#end()            " required
 
 "srcery
   " Plugin 'srcery-colors/srcery-vim'
   " Plugin 'tomasr/molokai'
-  " Plugin 'morhetz/gruvbox'
   " Plugin 'gosukiwi/vim-atom-dark'
   " Plugin 'w0rp/ale'
   " Plugin 'airblade/vim-gitgutter'
   " Plugin 'vim-scripts/ReplaceWithRegister'
   " Plugin 'Shougo/neocomplete.vim'
   " Plugin 'lifepillar/vim-mucomplete'
-  " Plugin 'davidhalter/jedi-vim'
 
 "filetype plugin on
 "

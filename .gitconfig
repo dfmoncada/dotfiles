@@ -37,6 +37,7 @@
 
 	# %C(auto) requires Git 1.8.3 or later
 	one = !git --paginate log --pretty=format:'%C(auto)%h%Creset %s%C(auto)%d%Creset %C(magenta bold)(%cr)%Creset %C(cyan)<%aN>%Creset'
+	; oneline = !git --paginate log --pretty=format:'%C(auto)%h%Creset %s%C(auto)%d%Creset %C(magenta bold)(%cr)%Creset %C(cyan)<%aN>%Creset'
 	oneline = !git --paginate log --pretty=format:'%C(auto)%h%Creset %s%C(auto)%d%Creset %C(magenta bold)(%cr)%Creset %C(cyan)<%aN>%Creset'
 
 	# requires Git 1.5.4 or later
@@ -92,7 +93,7 @@
 
 [core]
 	attributesfile = ~/.gitattributes
-	excludesfile = ~/.gitignore
+	excludesFile = ~/.gitignore
 
 	# S = chop long lines (rather than wrap them onto next line)
 	#
@@ -134,8 +135,9 @@
 	log = ~/.zsh/bin/diff-highlight | less -iFMRSX --pattern='^(commit|diff)'
 	show = ~/.zsh/bin/diff-highlight | less -iFMRSX --pattern='^(commit|diff)'
 	show-branch = true
-	status = true
+	status = false
 	whatchanged = ~/.zsh/bin/diff-highlight | less -iFMRSX --pattern='^(commit|diff)'
+	branch = false
 
 [protocol]
 	# Added in Git 2.18.0.
