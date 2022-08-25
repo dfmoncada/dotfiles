@@ -28,7 +28,9 @@ nnoremap <leader>q :q<CR>
 nnoremap <leader>Q :%bd<CR>
 
 " easier Gstatus
+" nnoremap <leader>g :Git<CR>
 nnoremap <leader>g :Git<CR>
+" nnoremap <leader>G :DiffviewFileHistory<CR>
 
 nnoremap <leader>n <cmd>noh<CR>
 nnoremap <leader>u <cmd>UndotreeToggle<CR>
@@ -133,3 +135,5 @@ let g:coc_explorer_global_presets = {
 \     'sources': [{'name': 'buffer', 'expand': v:true}]
 \   },
 \ }
+nnoremap <leader>z :Goyo<CR>
+nnoremap <leader>E :NERDTreeFind<CR>

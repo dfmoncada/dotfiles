@@ -4,6 +4,7 @@ plugins=(
   git-hubflow
   # bundler
   rbenv
+  env
   pip
   # dotenv
   # osx

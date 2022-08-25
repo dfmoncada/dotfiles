@@ -5,7 +5,9 @@ call vundle#begin()
   Plugin 'tpope/vim-abolish'
   Plugin 'VundleVim/Vundle.vim'
   Plugin 'tpope/vim-fugitive'
+  Plugin 'shumphrey/fugitive-gitlab.vim'
   Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+  Plugin 'phaazon/hop.nvim'
   " Plugin 'powerline/powerline'
   " Plugin 'powerline/powerline-fonts'
   " Plugin 'vim-airline/vim-airline'
@@ -13,10 +15,12 @@ call vundle#begin()
   Plugin 'sindrets/diffview.nvim'
   Plugin 'tpope/vim-surround'
   Plugin 'scrooloose/nerdtree'
+  Plugin 'kyazdani42/nvim-tree.lua'
   Plugin 'tpope/vim-unimpaired'
   Plugin 'tpope/vim-commentary'
   Plugin 'tpope/vim-rails'
   Plugin 'tpope/vim-sensible'
+  Plugin 'karb94/neoscroll.nvim'
   " Plugin 'Xuyuanp/nerdtree-git-plugin'
   Plugin 'chriskempson/base16-vim'
   " Plugin 'https://github.com/adelarsq/neoline.vim'
@@ -38,8 +42,8 @@ call vundle#begin()
   Plugin 'SirVer/ultisnips'
   Plugin 'honza/vim-snippets'
   Plugin 'vim-scripts/CSApprox'
-  Plugin 'pseewald/vim-anyfold'
-  Plugin 'arecarn/vim-fold-cycle'
+  " Plugin 'pseewald/vim-anyfold'
+  " Plugin 'arecarn/vim-fold-cycle'
   Plugin 'mbbill/undotree'
   Plugin 'majutsushi/tagbar'
   Plugin 'liuchengxu/vista.vim'
@@ -47,6 +51,7 @@ call vundle#begin()
   Plugin 'xolox/vim-notes'
   Plugin 'xolox/vim-colorscheme-switcher'
   Plugin 'chrisbra/colorizer'
+  Plugin 'norcalli/nvim-colorizer.lua'
   Plugin 'chrisbra/unicode.vim'
   Plugin 'nvim-treesitter/nvim-treesitter'
   Plugin 'MaxMEllon/vim-jsx-pretty'
@@ -58,6 +63,9 @@ call vundle#begin()
   Plugin 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
   Plugin 'terryma/vim-expand-region'
   Plugin 'Yggdroot/indentLine'
+  Plugin 'mfussenegger/nvim-dap'
+
+
 
   Plugin 'nvim-lua/plenary.nvim'
   Plugin 'nvim-telescope/telescope.nvim'

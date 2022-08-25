@@ -74,6 +74,7 @@ set lazyredraw                        " don't bother updating screen during macr
 
 set scrolloff=3                       " start scrolling 3 lines before edge of viewport
 set shell=zsh                         " shell to use for `!`, `:!`, `system()` etc.
+set shellcmdflag=-ic
 set noshiftround                      " don't always indent by multiple of shiftwidth
 set shiftwidth=2                      " spaces per tab (when shifting)
 set shortmess+=A                      " ignore annoying swapfile messages
@@ -283,5 +284,6 @@ let g:prettier#autoformat_require_pragma = 0
 " anyfold
 " autocmd Filetype * AnyFoldActivate
 let g:anyfold_fold_comments=1
-" set foldlevel=1
+set nofoldenable
+
 hi Folded term=NONE cterm=NONE

@@ -63,6 +63,28 @@ function set_token() {
   export token=`curl 'https://api-dev.myhotel.io/security/login' \
     -H 'x-api-key: Upy1BTFzD63LFLzlkeCy72gFJokPrUGC4ZLUtbIq' \
     -H 'content-type: application/json' \
-    --data-raw '{"username":"diego@myhotel.com.es","password":"4cda67c9f1dc4ba1b675838c0ba96ad7"}' |
+    --data-raw '{"username":"ghourton@myhotel.com.es","password":"4cda67c9f1dc4ba1b675838c0ba96ad7"}' |
     jq --raw-output '.token'`
 }
+
+function mh_dev() {
+  mysql -A -u myhotel_dev \
+    -p'1035#dEvmY0t3l' \
+    -h db-dev.myhotel.io
+    -e $1 \
+      myhotel_production
+}
+
+function mh_prod() {
+  mysql -A -u myhotel \
+    -p 'mYH0tel#7102!Aur0ra' \
+    -h db.myhotel.io
+    -e $1 \
+      myhotel_production
+}
+
+jdk() {
+  version=$1
+  export JAVA_HOME=$(/usr/libexec/java_home -v"$version");
+  java -version
+ }
