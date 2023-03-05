@@ -178,9 +178,9 @@ export PATH=/Users/diegos/.meteor:$PATH
 
 # tabtab source for packages
 # uninstall by removing these lines
-[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
+[[ -f $HOME/.config/tabtab/__tabtab.zsh ]] && . $HOME/.config/tabtab/__tabtab.zsh || true
 
 alias luamake=$HOME/.config/lsp/lua-language-server/3rd/luamake/luamake
 
-source $HOME/.docker/init-zsh.sh || true # Added by Docker Desktop
+source /Users/macbookpro/.docker/init-zsh.sh || true # Added by Docker Desktop
 

@@ -15,4 +15,6 @@ bundle/
 tmp/
 undo/
 sessions/
-.vim/plugged/*
+*/plugged/*
+*/pack/*
+.oh-my-zsh/*
