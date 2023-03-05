@@ -163,6 +163,7 @@ set showcmd
 
 " autocomplete
 set wildmode=longest:full,full        " shell-like autocomplete to unambiguous portion
+set completeopt=menu,menuone,noselect
 set wildmenu
 
 " wildignore
@@ -287,3 +288,4 @@ let g:anyfold_fold_comments=1
 set nofoldenable
 
 hi Folded term=NONE cterm=NONE
+set shellcmdflag=-c

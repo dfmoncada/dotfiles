@@ -28,6 +28,9 @@ PATH=$PATH:$HOME/.npm-packages/bin
 PATH=$PATH:$HOME/scripts
 PATH=$PATH:$HOME/
 PATH=$PATH:$HOME/Library/Python/3.8/bin
+PATH=/usr/local/opt/python/libexec/bin:$PATH
+PATH="$HOME/.config/lsp/lua-language-server/bin:$PATH"
+
 # PATH=$PATH:/usr/local/opt/srm/bin
 # PATH=$PATH:$SYSTEM_PATH
 # PATH=$PATH:$EC2_HOME/bin

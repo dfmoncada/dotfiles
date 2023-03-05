@@ -35,10 +35,14 @@ call vundle#begin()
   Plugin 'ryanoasis/vim-devicons'
   " Plugin 'kyazdani42/nvim-web-devicons'
   Plugin 'ctrlpvim/ctrlp.vim'
-  Plugin 'neoclide/coc.nvim', {'branch': 'release'}
-  " Plugin 'neovim/nvim-lspconfig'
-  " Plugin 'hrsh7th/nvim-compe'
-  " Plugin 'nvim-lua/completion-nvim'
+  " Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+  Plugin 'neovim/nvim-lspconfig'
+  Plugin 'hrsh7th/nvim-cmp'
+  Plugin 'hrsh7th/cmp-nvim-lsp'
+  Plugin 'hrsh7th/cmp-buffer'
+  Plugin 'hrsh7th/cmp-path'
+  Plugin 'hrsh7th/cmp-cmdline'
+
   Plugin 'SirVer/ultisnips'
   Plugin 'honza/vim-snippets'
   Plugin 'vim-scripts/CSApprox'
@@ -70,7 +74,7 @@ call vundle#begin()
   Plugin 'nvim-lua/plenary.nvim'
   Plugin 'nvim-telescope/telescope.nvim'
   Plugin 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-  Plugin 'fannheyward/telescope-coc.nvim'
+  " Plugin 'fannheyward/telescope-coc.nvim'
 
   Plugin 'alvan/vim-closetag'
   Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }

@@ -87,4 +87,22 @@ jdk() {
   version=$1
   export JAVA_HOME=$(/usr/libexec/java_home -v"$version");
   java -version
- }
+}
+
+get_deploy_ip() {
+  aws ec2 describe-instances |
+  jq --raw-output '.Reservations | map(select(.Instances[0].KeyName == "ec2-test-deploy"))[0].Instances[0].PublicIpAddress'
+}
+ssh_deploy_login() {
+  pem_path=~/Downloads/ec2-test-deploy.pem
+  user=ec2-user
+
+  aws ec2 start-instances --instance-ids i-0bb00a22a848e4cc2 --region sa-east-1 > /dev/null #starting aws computer for deploy
+  sleep 3
+
+  ssh -i ${pem_path}${user}@$(get_deploy_ip)
+}
+
+ssh_deploy_kill() {
+  aws ec2 start-instances --instance-ids i-0bb00a22a848e4cc2 --region sa-east-1 > /dev/null #starting aws computer for deploy
+}

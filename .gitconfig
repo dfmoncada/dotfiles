@@ -39,6 +39,8 @@
 	one = !git --paginate log --pretty=format:'%C(auto)%h%Creset %s%C(auto)%d%Creset %C(magenta bold)(%cr)%Creset %C(cyan)<%aN>%Creset'
 	; oneline = !git --paginate log --pretty=format:'%C(auto)%h%Creset %s%C(auto)%d%Creset %C(magenta bold)(%cr)%Creset %C(cyan)<%aN>%Creset'
 	oneline = !git --paginate log --pretty=format:'%C(auto)%h%Creset %s%C(auto)%d%Creset %C(magenta bold)(%cr)%Creset %C(cyan)<%aN>%Creset'
+  deploy = !git --paginate log --pretty=format:'%s%C(auto) %C(magenta bold)(%cr)%Creset %C(cyan)<%aN>%Creset'
+
 
 	# requires Git 1.5.4 or later
 	p = add -p

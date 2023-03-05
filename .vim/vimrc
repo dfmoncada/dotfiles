@@ -2,7 +2,7 @@ source $HOME/.config/nvim/common
 source $HOME/.config/nvim/plugins
 source $HOME/.config/nvim/functions
 source $HOME/.config/nvim/bindings
-source $HOME/.config/nvim/coc
+" source $HOME/.config/nvim/coc
 " lua require(os.getenv("HOME") .. "/Personal/dotfiles/.vim/lsp.lua")
 source $HOME/.config/nvim/plugin_functions.vim
 source $HOME/.config/nvim/styles
@@ -11,7 +11,8 @@ lua require('lualine').setup()
 lua require('colorizer').setup()
 luafile $HOME/.vim/hop.lua
 luafile $HOME/.vim/dap.lua
-
+luafile $HOME/.vim/lsp_config.lua
+luafile $HOME/.vim/nvim_cmp.lua
 " lua << SCROLL
 "     require('neoscroll').setup({
 "         -- All these keys will be mapped to their corresponding default scrolling animation

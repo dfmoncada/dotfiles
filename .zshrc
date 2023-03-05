@@ -33,6 +33,12 @@ autoload -U compinit && compinit
 function precmd () { vcs_info }
 
 bindkey -e # emacs bindings, set to -v for vi bindings
+bindkey "^P" up-line-or-search
+bindkey "^N" down-line-or-search
+bindkey "^C" down-line-or-search
+
+bindkey "<shift><right>" 'clear'
+
 
 # AUTOMCOMPLETE
 # source ~/code/personal/scripts/*completion.bash
@@ -173,3 +179,8 @@ export PATH=/Users/diegos/.meteor:$PATH
 # tabtab source for packages
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
+
+alias luamake=$HOME/.config/lsp/lua-language-server/3rd/luamake/luamake
+
+source $HOME/.docker/init-zsh.sh || true # Added by Docker Desktop
+
