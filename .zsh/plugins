@@ -1,31 +1,15 @@
 # vim:ft=zsh
 plugins=(
   git
-  git-hubflow
-  # bundler
-  rbenv
-  env
-  pip
-  # dotenv
-  # osx
-  rake
-  ruby
-  zsh-better-npm-completion
-  zsh-completions
-  zsh-autosuggestions
-  # zsh-syntax-highlighting
   docker
   docker-compose
   npm
   fzf
-  # tmux
-  # fzf-zsh
-  postgres
-  mvn
-  aws
-  heroku
-  kops
-  terraform
-  dotnet
-  kubectl
+  zsh-autosuggestions
+  zsh-completions
 )
+
+# Add platform-specific plugins
+if [[ "$IS_MACOS" == "1" ]]; then
+  plugins+=(macos)
+fi

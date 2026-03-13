@@ -1,85 +1,51 @@
 # vim:ft=zsh
-#
-# Command Aliasses
-#
 
-# alias clip='nc -U ~/.clipper.sock'
-# alias d='hash -d'
+# Core
 alias vim=nvim
+alias v=vim
 alias e=exit
-alias b=bundle
-alias be='bundle exec'
-alias a=ack
-alias g=git
-alias groot='cd $(git rev-parse --show-toplevel 2> /dev/null || echo -n ".")'
 alias h=history
-alias j=jump
+alias t=tmux
+alias mux=tmuxinator
 alias l='ls -F'
 alias ll='ls -laF'
-alias o='git oneline'
-alias p='git patch'
-alias prettyjson='python -m json.tool'
-# alias python=python3
-# alias pip=pip3
-alias oo='git oneline -10'
-alias s=ssh
-alias serve='python -m SimpleHTTPServer' # optional arg: port (defaults to 8000)
-alias t=tmux
-alias v=vim
-alias r='. ranger'
-alias mux='tmuxinator'
+alias prettyjson='python3 -m json.tool'
 
-alias npm='nocorrect npm'
-alias meteor='nocorrect meteor'
+# Git (use `command git` to avoid shell function conflicts)
+alias g='command git'
+alias gs='command git status -s'
+alias o='command git oneline'
+alias oo='command git oneline -10'
+alias groot='cd $(command git rev-parse --show-toplevel 2>/dev/null || echo ".")'
 
-# if command -v nvim &> /dev/null; then
-#   alias vim="nvim -u $HOME/.vim/vimrc" # Use `\vim` or `command vim` to get the real vim.
-# fi
+# Editors/configs
+alias zshrc="$EDITOR $HOME/.zshrc"
+alias vimrc="$EDITOR $HOME/.config/nvim/init.lua"
+alias tmuxrc="$EDITOR $HOME/.tmux.conf"
 
-#
+# Docker
+alias dc='docker compose'
+alias dps='docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"'
+alias dlogs='docker compose logs -f --tail=50'
+
+# Claude/OpenCode
+alias claude='command claude'
+
+# Clipboard (cross-platform)
+if [[ "$IS_MACOS" == "1" ]]; then
+  alias clip='pbcopy'
+  alias paste='pbpaste'
+else
+  alias clip='xclip -selection clipboard'
+  alias paste='xclip -selection clipboard -o'
+fi
+
 # Global aliases
-# (work at any position within the command line)
-#
-
-# Mnemonic: "[C]lip"
-alias -g C="|xclip -selection clipboard"
-# Mnemonic: "[G]rep"
 alias -g G="|grep"
-# Mnemonic: "[H]ead"
 alias -g H="|head"
-# Pretty-print JSON.
-# Mnemonic: "[J]SON"
-alias -g J="|python -m json.tool"
-# Mnemonic: "[L]ess"
 alias -g L="|less"
-# Mnemonic: "[R]eset"
-alias -g R=";clear;test -n "$TMUX" && tmux clear-history;"
-# Mnemonic: "[W]c"
 alias -g W="|wc -l"
-# Mnemonic: "[O]output"
-alias -g O="|& tee -a output.logs"
+alias -g J="|python3 -m json.tool"
 
-
-## TODO: by vars file? dunno yet
-alias zshrc="vim $HOME/.zshrc"
-alias vimrc="vim $HOME/.vim/vimrc"
-alias comprc="vim $HOME/.config/compton.conf"
-alias logout="vim gnome-session-quit"
-# alias i3rc="vim $HOME/.config/i3/config"
-alias i3rc="vim $HOME/.i3/config"
-alias polyrc="vim $HOME/.config/polybar"
-alias polyrc="vim $HOME/.config/polybar"
-alias tmuxrc="vim $HOME/.tmux.conf"
-alias gs='git status -s'
-alias clip="nc localhost:8377"
-
-
-
-##### OTHER
-
-#
-## Suffix aliases
-## (eg. "foo.md" to open Markdown files in "Marked 2.app")
-##
-## alias -s md='open -a "Marked 2.app"'
-#
+# Nocorrect
+alias npm='nocorrect npm'

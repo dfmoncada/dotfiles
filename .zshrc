@@ -1,114 +1,62 @@
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
+# ~/.zshrc — modular, macOS + Linux compatible
 
-export api="$HOME/platform/irwin-app/irwin-api"
-export fe="$HOME/platform/irwin-app/irwin-fe"
-export etl="$HOME/platform/irwin-app/factset-etl"
-export utils="$HOME/platform/node-modules/formatter"
-export admin="$HOME/platform/admin-fe"
-export org="$HOME/Projects/organizer"
-export orgcomp="$HOME/platform/factset/organization_component"
-export holdcomp="$HOME/platform/factset/holding_component"
-export complib="$HOME/platform/node-modules/component-library"
-export deusfe="$HOME/Projects/deuster/react-fe"
-export deusapi="$HOME/Projects/deuster/rails-api"
-export slapi="$HOME/sldesk/backend"
-export slfe="$HOME/sldesk/frontend"
+# Detect OS
+export IS_MACOS=$([[ "$(uname)" == "Darwin" ]] && echo 1 || echo 0)
+export IS_LINUX=$([[ "$(uname)" == "Linux" ]] && echo 1 || echo 0)
 
+# Modular config
 source $HOME/.zsh/exports
 source $HOME/.zsh/path
 source $HOME/.zsh/aliases
 source $HOME/.zsh/functions
 source $HOME/.zsh/plugins
+source $HOME/.zsh/prompt
 
-eval "$(rbenv init -)"
-
-# oh-my-sh
-
-
-source $HOME/.dockerrc
+# Oh-my-zsh
 source $ZSH/oh-my-zsh.sh
+
+# Completions
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 autoload -U compinit && compinit
+autoload -Uz vcs_info
 function precmd () { vcs_info }
 
-bindkey -e # emacs bindings, set to -v for vi bindings
+# Keybindings (emacs mode)
+bindkey -e
 bindkey "^P" up-line-or-search
 bindkey "^N" down-line-or-search
-bindkey "^C" down-line-or-search
 
-bindkey "<shift><right>" 'clear'
-
-
-# AUTOMCOMPLETE
-# source ~/code/personal/scripts/*completion.bash
-
-zstyle ':completion:*' list-colors ''
-zstyle -e ':completion:*' special-dirs '[[ $PREFIX = (../)#(..) ]] && reply=(..)'
-zstyle ':completion:*:complete:(cd|pushd):*' tag-order 'local-directories named-directories'
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*:descriptions' format %F{default}%B%{$__WINCENT[ITALIC_ON]%}--- %d ---%{$__WINCENT[ITALIC_OFF]%}%b%f
-zstyle ':completion:*' menu select
-
-autoload -U colors
-colors
-
-# http://zsh.sourceforge.net/Doc/Release/User-Contributions.html
-autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git hg
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' disable-patterns "${(b)HOME}/code/(commerce|portal|portal-ee|portal-master)(|/*)"
-zstyle ':vcs_info:*' stagedstr "%F{green}●%f" # default 'S'
-zstyle ':vcs_info:*' unstagedstr "%F{red}●%f" # default 'U'
-zstyle ':vcs_info:*' use-simple true
-zstyle ':vcs_info:git+set-message:*' hooks git-untracked
-zstyle ':vcs_info:git*:*' formats '[%b%m%c%u] ' # default ' (%s)-[%b]%c%u-'
-zstyle ':vcs_info:git*:*' actionformats '[%b|%a%m%c%u] ' # default ' (%s)-[%b|%a]%c%u-'
-zstyle ':vcs_info:hg*:*' formats '[%m%b] '
-zstyle ':vcs_info:hg*:*' actionformats '[%b|%a%m] '
-zstyle ':vcs_info:hg*:*' branchformat '%b'
-zstyle ':vcs_info:hg*:*' get-bookmarks true
-zstyle ':vcs_info:hg*:*' get-revision true
-zstyle ':vcs_info:hg*:*' get-mq false
-zstyle ':vcs_info:hg*+gen-hg-bookmark-string:*' hooks hg-bookmarks
-zstyle ':vcs_info:hg*+set-message:*' hooks hg-message
-
-RPROMPT_BASE="\${vcs_info_msg_0_}%F{blue}%~%f"
-setopt PROMPT_SUBST
-
-export RPROMPT=$RPROMPT_BASE
-export SPROMPT="zsh: correct %F{red}'%R'%f to %F{red}'%r'%f [%B%Uy%u%bes, %B%Un%u%bo, %B%Ue%u%bdit, %B%Ua%u%bbort]? "
-
-setopt AUTO_CD                 # [default] .. is shortcut for cd .. (etc)
-setopt AUTO_PARAM_SLASH        # tab completing directory appends a slash
-setopt AUTO_PUSHD              # [default] cd automatically pushes old dir onto dir stack
-setopt AUTO_RESUME             # allow simple commands to resume backgrounded jobs
-setopt CLOBBER                 # allow clobbering with >, no need to use >!
-setopt CORRECT                 # [default] command auto-correction
-setopt CORRECT_ALL             # [default] argument auto-correction
-setopt NO_FLOW_CONTROL         # disable start (C-s) and stop (C-q) characters
-setopt NO_HIST_IGNORE_ALL_DUPS # don't filter non-contiguous duplicates from history
-setopt HIST_FIND_NO_DUPS       # don't show dupes when searching
-setopt HIST_IGNORE_DUPS        # do filter contiguous duplicates from history
-setopt HIST_IGNORE_SPACE       # [default] don't record commands starting with a space
-setopt HIST_VERIFY             # confirm history expansion (!$, !!, !foo)
-setopt IGNORE_EOF              # [default] prevent accidental C-d from exiting shell
-setopt INTERACTIVE_COMMENTS    # [default] allow comments, even in interactive shells
-setopt LIST_PACKED             # make completion lists more densely packed
-setopt MENU_COMPLETE           # auto-insert first possible ambiguous completion
-setopt NO_NOMATCH              # [default] unmatched patterns are left unchanged
-# setopt PRINT_EXIT_VALUE        # [default] for non-zero exit status
-setopt PUSHD_IGNORE_DUPS       # don't push multiple copies of same dir onto stack
-setopt PUSHD_SILENT            # [default] don't print dir stack after pushing/popping
-setopt SHARE_HISTORY           # share history across shells
+# ZSH options
+setopt AUTO_CD
+setopt AUTO_PARAM_SLASH
+setopt AUTO_PUSHD
+setopt AUTO_RESUME
+setopt CLOBBER
+setopt CORRECT
+setopt CORRECT_ALL
+setopt NO_FLOW_CONTROL
+setopt NO_HIST_IGNORE_ALL_DUPS
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_VERIFY
+setopt IGNORE_EOF
+setopt INTERACTIVE_COMMENTS
+setopt LIST_PACKED
+setopt MENU_COMPLETE
+setopt NO_NOMATCH
+setopt PUSHD_IGNORE_DUPS
+setopt PUSHD_SILENT
+setopt SHARE_HISTORY
 
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 
+# Edit command line with $EDITOR
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '^x^x' edit-command-line
 
-# Make CTRL-Z background things and unbackground them.
+# CTRL-Z toggle foreground/background
 function fg-bg() {
   if [[ $#BUFFER -eq 0 ]]; then
     fg
@@ -119,6 +67,7 @@ function fg-bg() {
 zle -N fg-bg
 bindkey '^Z' fg-bg
 
+# Command timer in RPROMPT
 typeset -F SECONDS
 function -record-start-time() {
   emulate -L zsh
@@ -146,7 +95,7 @@ function -report-start-time() {
       SECS="$((~~$SECS))s"
     fi
     ELAPSED="${ELAPSED}${SECS}"
-    export RPROMPT="%F{cyan}%{$__WINCENT[ITALIC_ON]%}${ELAPSED}%{$__WINCENT[ITALIC_OFF]%}%f $RPROMPT_BASE"
+    export RPROMPT="%F{cyan}${ELAPSED}%f $RPROMPT_BASE"
     unset ZSH_START_TIME
   else
     export RPROMPT="$RPROMPT_BASE"
@@ -154,33 +103,43 @@ function -report-start-time() {
 }
 add-zsh-hook precmd -report-start-time
 
+# Auto ls after cd
 function -auto-ls-after-cd() {
   emulate -L zsh
-  # Only in response to a user-initiated `cd`, not indirectly (eg. via another
-  # function).
   if [ "$ZSH_EVAL_CONTEXT" = "toplevel:shfunc" ]; then
     ls -l
   fi
 }
 add-zsh-hook chpwd -auto-ls-after-cd
 
-setopt no_aliases
-source $HOME/.nvm/nvm.sh
-setopt aliases
+# VCS info for prompt
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' stagedstr "%F{green}●%f"
+zstyle ':vcs_info:*' unstagedstr "%F{red}●%f"
+zstyle ':vcs_info:*' use-simple true
+zstyle ':vcs_info:git+set-message:*' hooks git-untracked
+zstyle ':vcs_info:git*:*' formats '[%b%m%c%u] '
+zstyle ':vcs_info:git*:*' actionformats '[%b|%a%m%c%u] '
 
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
+RPROMPT_BASE="\${vcs_info_msg_0_}%F{blue}%~%f"
+setopt PROMPT_SUBST
+export RPROMPT=$RPROMPT_BASE
+export SPROMPT="zsh: correct %F{red}'%R'%f to %F{red}'%r'%f [%B%Uy%u%bes, %B%Un%u%bo, %B%Ue%u%bdit, %B%Ua%u%bbort]? "
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
+# Completion styling
+zstyle ':completion:*' list-colors ''
+zstyle -e ':completion:*' special-dirs '[[ $PREFIX = (../)#(..) ]] && reply=(..)'
+zstyle ':completion:*:complete:(cd|pushd):*' tag-order 'local-directories named-directories'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:descriptions' format %F{default}%B--- %d ---%b%f
+zstyle ':completion:*' menu select
 
-export PATH=/Users/diegos/.meteor:$PATH
+autoload -U colors
+colors
 
-# tabtab source for packages
-# uninstall by removing these lines
-[[ -f $HOME/.config/tabtab/__tabtab.zsh ]] && . $HOME/.config/tabtab/__tabtab.zsh || true
+# Source local overrides (not tracked in git)
+[[ -f $HOME/.zshrc.local ]] && source $HOME/.zshrc.local
 
-alias luamake=$HOME/.config/lsp/lua-language-server/3rd/luamake/luamake
-
-source /Users/macbookpro/.docker/init-zsh.sh || true # Added by Docker Desktop
-
+# Docker init (macOS)
+[[ -f $HOME/.docker/init-zsh.sh ]] && source $HOME/.docker/init-zsh.sh

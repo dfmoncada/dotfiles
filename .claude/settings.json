@@ -1,0 +1,166 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(command git diff:*)",
+      "Bash(command git log:*)",
+      "Bash(command git show:*)",
+      "Bash(command git status:*)",
+      "Bash(command git branch:*)",
+      "Bash(command git rev-parse:*)",
+      "Bash(command git checkout:*)",
+      "Bash(command git add:*)",
+      "Bash(command git commit:*)",
+      "Bash(command git remote:*)",
+      "Bash(command rg:*)",
+      "Bash(find:*)",
+      "Bash(rg:*)",
+      "Bash(make *)",
+      "Bash(make)",
+      "Bash(docker ps:*)",
+      "Bash(docker logs:*)",
+      "Bash(docker inspect:*)",
+      "Bash(docker compose ps:*)",
+      "Bash(docker compose logs:*)",
+      "Bash(docker exec:*)",
+      "Bash(python test_runner.py:*)",
+      "Bash(python -m pytest:*)",
+      "Bash(pip show:*)",
+      "Bash(pip list:*)",
+      "Bash(npm test:*)",
+      "Bash(npm run:*)",
+      "Bash(npx:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(wc:*)",
+      "Bash(hostname:*)",
+      "Bash(hostname)",
+      "Bash(uname:*)",
+      "Bash(sysctl:*)",
+      "Bash(df:*)",
+      "Bash(top:*)",
+      "Bash(gh:*)",
+      "Bash(tree:*)",
+      "Bash(sort:*)",
+      "Bash(sleep:*)",
+      "Bash(command gh:*)",
+      "Read"
+    ],
+    "deny": [
+      "Bash(find:*-exec::*)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/session-context.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/block-destructive.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/activity-log.sh",
+            "async": true
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|MultiEdit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/activity-log.sh",
+            "async": true
+          }
+        ]
+      },
+      {
+        "matcher": "Agent",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/activity-log.sh",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/activity-log.sh",
+            "async": true
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/notify-sound.sh",
+            "async": true
+          }
+        ]
+      }
+    ]
+  },
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "enabledPlugins": {
+    "pyright-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true
+  },
+  "alwaysThinkingEnabled": true,
+  "mcpServers": {
+    "jira": {
+      "command": "npx",
+      "args": ["-y", "jira-mcp"],
+      "env": {
+        "JIRA_BASE_URL": "https://diego-moncada.atlassian.net",
+        "JIRA_USER_EMAIL": "dfmoncada@gmail.com",
+        "JIRA_EMAIL": "dfmoncada@gmail.com",
+        "JIRA_API_TOKEN": "${JIRA_API_TOKEN}",
+        "JIRA_TYPE": "cloud",
+        "JIRA_AUTH_TYPE": "basic"
+      }
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest", "--vision"]
+    },
+    "memory": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"]
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+      }
+    },
+    "telegram": {
+      "command": "npx",
+      "args": ["-y", "mcp-telegram-agent"],
+      "env": {
+        "TELEGRAM_BOT_TOKEN": "${TELEGRAM_BOT_TOKEN}",
+        "TELEGRAM_CHAT_ID": "${TELEGRAM_CHAT_ID}"
+      }
+    }
+  }
+}

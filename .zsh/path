@@ -1,39 +1,43 @@
 # vim:ft=zsh
+# Build PATH — macOS + Linux compatible
+
 SYSTEM_PATH=$PATH
 unset PATH
 
-# keep these on separate lines to make changing their order easier
 PATH=/bin
 PATH=$PATH:$HOME/bin
 PATH=$PATH:$HOME/.zsh/bin
-# PATH=$PATH:$HOME/.vim/pack/bundle/opt/vcs-jump/bin
-
-# test -n "$N_PREFIX" && PATH=$PATH:$N_PREFIX/bin
-
-# PATH=$PATH:$HOME/.cargo/bin
-
-# if [ -d /usr/local/opt/mysql@5.7 ]; then
-#   PATH=$PATH:/usr/local/opt/mysql@5.7/bin
-# fi
-
+PATH=$PATH:$HOME/.local/bin
 PATH=$PATH:/usr/bin
 PATH=$PATH:/usr/sbin
 PATH=$PATH:/usr/local/bin
 PATH=$PATH:/usr/local/sbin
-PATH=$PATH:/usr/bin/vendor_perl
-PATH=$PATH:$HOME/.rbenv/bin/
-PATH=$PATH:$HOME/.gem/ruby/2.6.0/bin
-PATH=$PATH:$HOME/.local/bin/
-PATH=$PATH:$HOME/.npm-packages/bin
-PATH=$PATH:$HOME/scripts
-PATH=$PATH:$HOME/
-PATH=$PATH:$HOME/Library/Python/3.8/bin
-PATH=/usr/local/opt/python/libexec/bin:$PATH
-PATH="$HOME/.config/lsp/lua-language-server/bin:$PATH"
 
-# PATH=$PATH:/usr/local/opt/srm/bin
-# PATH=$PATH:$SYSTEM_PATH
-# PATH=$PATH:$EC2_HOME/bin
-# PATH=$PATH:$HOME/.local/bin
-# PATH=$PATH:$HOME/.cabal/bin
+# Linux-specific
+[[ "$IS_LINUX" == "1" ]] && PATH=$PATH:/usr/bin/vendor_perl
+
+# Homebrew (macOS Apple Silicon)
+[[ -d /opt/homebrew/bin ]] && PATH=/opt/homebrew/bin:$PATH
+
+# Homebrew (macOS Intel)
+[[ -d /usr/local/Homebrew/bin ]] && PATH=/usr/local/Homebrew/bin:$PATH
+
+# Bun
+[[ -d $HOME/.bun/bin ]] && PATH=$PATH:$HOME/.bun/bin
+
+# Go
+[[ -d $HOME/go/bin ]] && PATH=$PATH:$HOME/go/bin
+
+# Cargo/Rust
+[[ -d $HOME/.cargo/bin ]] && PATH=$PATH:$HOME/.cargo/bin
+
+# Python user packages
+[[ -d $HOME/Library/Python/3.11/bin ]] && PATH=$PATH:$HOME/Library/Python/3.11/bin
+[[ -d $HOME/.local/bin ]] && PATH=$PATH:$HOME/.local/bin
+
+# Scripts
+[[ -d $HOME/scripts ]] && PATH=$PATH:$HOME/scripts
+
+PATH=$PATH:$SYSTEM_PATH
+
 export PATH

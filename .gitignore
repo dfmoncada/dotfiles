@@ -1,20 +1,69 @@
-.gitconfig
-bundle/
-.netrwhist
-
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
-.scannerwork/
-.nvimlog
+# Vim
 *.un~
 *.swo
 *.swp
+.netrwhist
+.nvimlog
+
+# Python
 *.pyc
+__pycache__/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp
 tmp/
+
+# Editor sessions
 undo/
 sessions/
+
+# Plugins (managed by package managers)
 */plugged/*
 */pack/*
-.oh-my-zsh/*
+.oh-my-zsh/
+
+# Node
+node_modules/
+bun.lock
+
+# Secrets — never commit
+.env
+.env.local
+*.secret
+credentials.json
+.zshrc.local
+
+# Claude Code runtime
+.claude/activity.log
+.claude/cache/
+.claude/history.jsonl
+.claude/stats-cache.json
+.claude/statsig/
+.claude/telemetry/
+.claude/todos/
+.claude/tasks/
+.claude/plans/
+.claude/session-env/
+.claude/shell-snapshots/
+.claude/file-history/
+.claude/debug/
+.claude/image-cache/
+.claude/paste-cache/
+.claude/chrome/
+.claude/ide/
+.claude/plugins/
+.claude/projects/
+.claude/backups/
+.claude/mcp-needs-auth-cache.json
+.claude/settings.local.json
+.claude/.git/
+.claude/.gitignore
+
+# OpenCode runtime
+.config/opencode/node_modules/
+.config/opencode/bun.lock
+.config/opencode/package.json
+.config/opencode/.gitignore

@@ -1,0 +1,22 @@
+name: eztask
+root: ~/Projects/eztask/
+
+windows:
+  - backend:
+      root: ~/Projects/eztask/backend
+      layout: main-vertical
+      panes:
+        - vim TODO.md
+        - opencode
+
+  - frontend:
+      root: ~/Projects/eztask/frontend/apj-backoffice
+      panes:
+        - npm start
+
+  - services:
+      root: ~/Projects/eztask/backend/
+      layout: main-vertical
+      panes:
+        - docker compose up web
+        - docker compose up redis postgres celery celery-beat celery-email celery-scheduler
