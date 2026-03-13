@@ -138,6 +138,38 @@ mkdir -p "$HOME/Documents/Obsidian Vault/DailyNotes"
 touch "$HOME/Documents/Obsidian Vault/Claude Code/Activity Log.md"
 touch "$HOME/Documents/Obsidian Vault/Claude Code/Decisions.md"
 touch "$HOME/Documents/Obsidian Vault/Claude Code/Plan.md"
+touch "$HOME/Documents/Obsidian Vault/Claude Code/Telegram Tasks.md"
+
+# --- Telegram worker service ---
+echo ">> Telegram worker service"
+if [ "$OS" = "Darwin" ]; then
+  PLIST="$HOME/Library/LaunchAgents/com.dfmoncada.telegram-worker.plist"
+  # Unload if already loaded
+  launchctl bootout "gui/$(id -u)/com.dfmoncada.telegram-worker" 2>/dev/null || true
+  cp "$DOTFILES/services/com.dfmoncada.telegram-worker.plist" "$PLIST"
+  echo "  installed: $PLIST"
+  if [ -n "${TELEGRAM_BOT_TOKEN:-}" ] && [ -n "${TELEGRAM_CHAT_ID:-}" ]; then
+    launchctl bootstrap "gui/$(id -u)" "$PLIST" 2>/dev/null || true
+    echo "  started: telegram-worker (launchd)"
+  else
+    echo "  skipped start: set TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID in ~/.zshrc.local first"
+    echo "  then run: launchctl bootstrap gui/\$(id -u) $PLIST"
+  fi
+
+elif [ "$OS" = "Linux" ]; then
+  SYSTEMD_DIR="$HOME/.config/systemd/user"
+  mkdir -p "$SYSTEMD_DIR"
+  cp "$DOTFILES/services/telegram-worker.service" "$SYSTEMD_DIR/"
+  systemctl --user daemon-reload
+  echo "  installed: $SYSTEMD_DIR/telegram-worker.service"
+  if [ -n "${TELEGRAM_BOT_TOKEN:-}" ] && [ -n "${TELEGRAM_CHAT_ID:-}" ]; then
+    systemctl --user enable --now telegram-worker.service
+    echo "  started: telegram-worker (systemd)"
+  else
+    echo "  skipped start: set TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID in ~/.zshrc.local first"
+    echo "  then run: systemctl --user enable --now telegram-worker.service"
+  fi
+fi
 
 # --- Reminder ---
 echo ""
@@ -152,3 +184,6 @@ echo "     export TELEGRAM_CHAT_ID=..."
 echo "  2. Install Claude Code: npm install -g @anthropic-ai/claude-code"
 echo "  3. Install OpenCode: https://opencode.ai"
 echo "  4. Restart your shell: exec zsh"
+echo "  5. Telegram worker: sends tasks to opencode via @Moncadasbot"
+echo "     macOS: launchctl kickstart gui/\$(id -u)/com.dfmoncada.telegram-worker"
+echo "     Linux: systemctl --user status telegram-worker"

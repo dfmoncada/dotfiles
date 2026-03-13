@@ -1,0 +1,15 @@
+[Unit]
+Description=Telegram → OpenCode worker
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/bin/bash -lc "source ~/.zshrc.local 2>/dev/null; exec ~/dotfiles/scripts/telegram-worker.sh 10"
+Restart=always
+RestartSec=10
+Environment=PATH=/usr/local/bin:/usr/bin:/bin:%h/.local/bin:%h/go/bin
+WorkingDirectory=%h
+
+[Install]
+WantedBy=default.target
