@@ -9,9 +9,21 @@ POLL_INTERVAL="${1:-10}"
 OFFSET_FILE="$HOME/.telegram-worker-offset"
 LOG_FILE="$HOME/Documents/Obsidian Vault/Claude Code/Telegram Tasks.md"
 
+# Load secrets (check common locations)
+for envfile in "$HOME/.env" "$HOME/.zshrc.local" "$HOME/.secrets"; do
+  if [ -f "$envfile" ]; then
+    set +e
+    set -a
+    source "$envfile" 2>/dev/null
+    set +a
+    set -e
+  fi
+done
+
 # Ensure env vars
 if [ -z "${TELEGRAM_BOT_TOKEN:-}" ] || [ -z "${TELEGRAM_CHAT_ID:-}" ]; then
   echo "ERROR: TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID must be set"
+  echo "Add them to ~/.zshrc.local"
   exit 1
 fi
 
