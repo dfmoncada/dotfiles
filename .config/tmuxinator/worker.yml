@@ -1,0 +1,7 @@
+name: worker
+root: ~/
+
+windows:
+  - telegram:
+      panes:
+        - ~/dotfiles/scripts/telegram-worker.sh 10
