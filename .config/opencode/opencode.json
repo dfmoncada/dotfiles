@@ -1,4 +1,21 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "default_agent": "coordinator"
+  "default_agent": "coordinator",
+  "permission": {
+    "*": "allow",
+    "bash": {
+      "*": "allow",
+      "rm -rf *": "deny",
+      "git push --force*": "deny"
+    },
+    "edit": "allow",
+    "external_directory": {
+      "~/Documents/Obsidian Vault/*": "allow",
+      "~/Documents/Obsidian Vault/**": "allow",
+      "~/Projects/*": "allow",
+      "~/Projects/**": "allow",
+      "~/dotfiles/*": "allow",
+      "~/dotfiles/**": "allow"
+    }
+  }
 }

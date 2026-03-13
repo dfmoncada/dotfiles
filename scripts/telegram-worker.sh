@@ -7,7 +7,8 @@ set -euo pipefail
 
 POLL_INTERVAL="${1:-10}"
 OFFSET_FILE="$HOME/.telegram-worker-offset"
-LOG_FILE="$HOME/Documents/Obsidian Vault/Claude Code/Telegram Tasks.md"
+LOG_FILE="$HOME/.telegram-worker-tasks.log"
+OBSIDIAN_LOG="$HOME/Documents/Obsidian Vault/Claude Code/Telegram Tasks.md"
 
 # Load secrets (check common locations)
 for envfile in "$HOME/.env" "$HOME/.zshrc.local" "$HOME/.secrets"; do
@@ -46,7 +47,10 @@ send_reply() {
 
 log_task() {
   local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
-  echo "- \`$timestamp\` $1" >> "$LOG_FILE"
+  local entry="- \`$timestamp\` $1"
+  echo "$entry" >> "$LOG_FILE"
+  # Also write to Obsidian if accessible
+  echo "$entry" >> "$OBSIDIAN_LOG" 2>/dev/null || true
 }
 
 echo "🤖 Telegram worker started (polling every ${POLL_INTERVAL}s)"
@@ -54,8 +58,7 @@ echo "   Bot: @Moncadasbot → opencode"
 echo "   Log: $LOG_FILE"
 echo ""
 
-# Create log file if needed
-mkdir -p "$(dirname "$LOG_FILE")"
+# Create log file
 touch "$LOG_FILE"
 
 while true; do
@@ -105,23 +108,38 @@ while true; do
     log_task "TASK: $TEXT"
     send_reply "⏳ Working on it..."
 
-    # Run via opencode
+    # Run via opencode (json format for clean output, strip ANSI)
     WORKDIR="$HOME/Projects/eztask/backend"
-    OUTPUT=$(opencode run \
+    RAW_OUTPUT=$(opencode run \
       --agent coordinator \
+      --format json \
       --dir "$WORKDIR" \
-      "$TEXT" 2>&1 | tail -50)
+      "$TEXT" 2>&1 || true)
 
-    # Send result back (truncate to 4000 chars for Telegram limit)
-    RESULT=$(echo "$OUTPUT" | tail -30 | head -c 4000)
+    # Extract assistant text from json events, strip ANSI codes
+    RESULT=$(echo "$RAW_OUTPUT" \
+      | grep -o '"text":"[^"]*"' \
+      | sed 's/"text":"//;s/"$//' \
+      | sed 's/\\n/\n/g' \
+      | sed 's/\x1b\[[0-9;]*m//g' \
+      | tail -30 \
+      | head -c 4000)
+
     if [ -z "$RESULT" ]; then
-      RESULT="Done (no output)"
+      # Fallback: strip ANSI from raw output
+      RESULT=$(echo "$RAW_OUTPUT" \
+        | sed 's/\x1b\[[0-9;]*[mGKH]//g' \
+        | sed 's/\x1b\[[0-9;]*//g' \
+        | grep -v '^\s*$' \
+        | tail -20 \
+        | head -c 4000)
     fi
 
-    send_reply "✅ Done:
-\`\`\`
-${RESULT}
-\`\`\`"
+    if [ -z "$RESULT" ]; then
+      RESULT="Done (no output captured)"
+    fi
+
+    send_reply "✅ $RESULT"
     log_task "DONE: $TEXT"
 
   done
