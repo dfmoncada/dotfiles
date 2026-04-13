@@ -4,6 +4,7 @@ description: >-
   implementation, and validation. Complete feature implementations,
   complex refactors, or anything going to production.
 mode: all
+model: anthropic/claude-sonnet-4-20250514
 color: "#3498DB"
 permission:
   bash:

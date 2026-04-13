@@ -3,6 +3,7 @@ description: >-
   Debugging specialist for errors, test failures, and unexpected behavior.
   Use when encountering any issues that need root cause analysis.
 mode: all
+model: anthropic/claude-sonnet-4-20250514
 color: error
 permission:
   bash:

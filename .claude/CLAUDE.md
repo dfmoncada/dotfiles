@@ -155,13 +155,17 @@ Let's try too keep our conversations as concise as possible. prefer to ask quest
 - Check for linter/formatter configs before writing code
 - Keep dependencies minimal; don't add libraries for trivial things
 
+# Telegram message handling
+
+When receiving Telegram messages, acknowledge immediately ("en eso", "recibido", etc.) before doing any work. Don't make Diego wait for a response while processing.
+
 # Agent/Skill Maintenance
 
 When creating or modifying agents or skills, always update BOTH locations:
 - Claude Code agents: `~/.claude/agents/`
-- OpenCode agents: `~/.config/opencode/agent/`
+- Claude Code agents: `~/.config/Claude/agent/`
 - Skills: `~/.claude/skills/` (shared by both tools)
 
 Formats differ slightly:
 - Claude Code: `tools`, `disallowedTools`, `model` (short: opus/sonnet), `memory`, `color` (name)
-- OpenCode: `mode`, `model` (full ID: anthropic/claude-opus-4-6), `color` (hex/semantic), `permission`, `tools` (write/edit booleans)
+- Claude Code: `mode`, `model` (full ID: anthropic/claude-opus-4-6), `color` (hex/semantic), `permission`, `tools` (write/edit booleans)

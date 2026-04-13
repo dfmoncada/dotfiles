@@ -1,7 +1,7 @@
 ---
 name: production-code-developer
 description: Use this agent for production-ready code requiring thorough analysis, implementation, and validation. Use for complete feature implementations, complex refactors, or anything going to production.
-model: inherit
+model: sonnet
 memory: user
 color: blue
 ---

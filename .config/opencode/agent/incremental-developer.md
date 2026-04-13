@@ -3,6 +3,7 @@ description: >-
   Implements changes incrementally — small, testable steps. Use for features,
   bug fixes, or refactors that benefit from a gradual approach.
 mode: all
+model: anthropic/claude-sonnet-4-20250514
 color: warning
 permission:
   bash:

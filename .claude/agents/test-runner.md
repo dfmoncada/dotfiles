@@ -3,7 +3,6 @@ name: test-runner
 description: Test automation expert. Use proactively to run tests and fix failures after code changes.
 tools: Read, Edit, Bash, Grep, Glob
 model: sonnet
-memory: user
 color: yellow
 ---
 

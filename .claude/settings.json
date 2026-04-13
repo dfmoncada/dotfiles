@@ -1,51 +1,39 @@
 {
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
   "permissions": {
     "allow": [
-      "Bash(command git diff:*)",
-      "Bash(command git log:*)",
-      "Bash(command git show:*)",
-      "Bash(command git status:*)",
-      "Bash(command git branch:*)",
-      "Bash(command git rev-parse:*)",
-      "Bash(command git checkout:*)",
-      "Bash(command git add:*)",
-      "Bash(command git commit:*)",
-      "Bash(command git remote:*)",
-      "Bash(command rg:*)",
-      "Bash(find:*)",
-      "Bash(rg:*)",
-      "Bash(make *)",
-      "Bash(make)",
-      "Bash(docker ps:*)",
-      "Bash(docker logs:*)",
-      "Bash(docker inspect:*)",
-      "Bash(docker compose ps:*)",
-      "Bash(docker compose logs:*)",
-      "Bash(docker exec:*)",
-      "Bash(python test_runner.py:*)",
-      "Bash(python -m pytest:*)",
-      "Bash(pip show:*)",
-      "Bash(pip list:*)",
-      "Bash(npm test:*)",
-      "Bash(npm run:*)",
-      "Bash(npx:*)",
-      "Bash(ls:*)",
-      "Bash(cat:*)",
-      "Bash(head:*)",
-      "Bash(tail:*)",
-      "Bash(wc:*)",
-      "Bash(hostname:*)",
-      "Bash(hostname)",
-      "Bash(uname:*)",
-      "Bash(sysctl:*)",
-      "Bash(df:*)",
-      "Bash(top:*)",
-      "Bash(gh:*)",
-      "Bash(tree:*)",
-      "Bash(sort:*)",
-      "Bash(sleep:*)",
-      "Bash(command gh:*)",
-      "Read"
+      "Bash(*)",
+      "Read",
+      "Write",
+      "Edit",
+      "MultiEdit",
+      "Glob",
+      "Grep",
+      "WebFetch",
+      "WebSearch",
+      "NotebookEdit",
+      "Task",
+      "Agent",
+      "Skill",
+      "AskUserQuestion",
+      "SendMessage",
+      "TeamCreate",
+      "TeamDelete",
+      "TaskCreate",
+      "TaskUpdate",
+      "TaskGet",
+      "TaskList",
+      "EnterPlanMode",
+      "ExitPlanMode",
+      "EnterWorktree",
+      "mcp__jira__*",
+      "mcp__playwright__*",
+      "mcp__github__*",
+      "mcp__telegram__*",
+      "mcp__MCP_DOCKER__*",
+      "mcp__claude-in-chrome__*"
     ],
     "deny": [
       "Bash(find:*-exec::*)"
@@ -96,6 +84,23 @@
             "type": "command",
             "command": "~/.claude/hooks/activity-log.sh",
             "async": true
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/agent-pane.sh",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|MultiEdit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/eslint-check.sh",
+            "async": true
           }
         ]
       }
@@ -118,18 +123,29 @@
       }
     ]
   },
-  "env": {
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
-  },
   "enabledPlugins": {
     "pyright-lsp@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true
+    "typescript-lsp@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true,
+    "github@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true,
+    "feature-dev@claude-plugins-official": true,
+    "playwright@claude-plugins-official": true,
+    "commit-commands@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true,
+    "claude-md-management@claude-plugins-official": true
   },
+  "language": "Español",
   "alwaysThinkingEnabled": true,
+  "voiceEnabled": true,
   "mcpServers": {
     "jira": {
       "command": "npx",
-      "args": ["-y", "jira-mcp"],
+      "args": [
+        "-y",
+        "jira-mcp"
+      ],
       "env": {
         "JIRA_BASE_URL": "https://diego-moncada.atlassian.net",
         "JIRA_USER_EMAIL": "dfmoncada@gmail.com",
@@ -141,22 +157,28 @@
     },
     "playwright": {
       "command": "npx",
-      "args": ["-y", "@playwright/mcp@latest", "--vision"]
-    },
-    "memory": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-memory"]
+      "args": [
+        "-y",
+        "@playwright/mcp@latest",
+        "--vision"
+      ]
     },
     "github": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
       "env": {
         "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
       }
     },
     "telegram": {
       "command": "npx",
-      "args": ["-y", "mcp-telegram-agent"],
+      "args": [
+        "-y",
+        "mcp-telegram-agent"
+      ],
       "env": {
         "TELEGRAM_BOT_TOKEN": "${TELEGRAM_BOT_TOKEN}",
         "TELEGRAM_CHAT_ID": "${TELEGRAM_CHAT_ID}"

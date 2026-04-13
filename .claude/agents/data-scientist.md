@@ -3,7 +3,6 @@ name: data-scientist
 description: Data analysis expert for SQL queries, BigQuery operations, and data insights. Use proactively for data analysis tasks and queries.
 tools: Bash, Read, Write, Grep
 model: sonnet
-memory: user
 color: purple
 ---
 

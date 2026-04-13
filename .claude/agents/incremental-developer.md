@@ -2,7 +2,7 @@
 name: incremental-developer
 description: Implements changes incrementally — small, testable steps. Use for features, bug fixes, or refactors that benefit from a gradual approach.
 tools: Read, Edit, Write, Bash, Grep, Glob
-model: inherit
+model: sonnet
 memory: user
 color: yellow
 ---
