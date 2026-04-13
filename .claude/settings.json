@@ -46,6 +46,12 @@
         "hooks": [
           {
             "type": "command",
+            "command": "~/.claude/scripts/sync-dotfiles.sh pull",
+            "timeout": 20,
+            "async": true
+          },
+          {
+            "type": "command",
             "command": "~/.claude/hooks/session-context.sh",
             "timeout": 10
           }
@@ -117,6 +123,11 @@
           {
             "type": "command",
             "command": "~/.claude/hooks/notify-sound.sh",
+            "async": true
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/scripts/sync-dotfiles.sh push",
             "async": true
           }
         ]
